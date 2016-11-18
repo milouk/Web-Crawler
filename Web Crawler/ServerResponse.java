@@ -4,7 +4,7 @@
 import java.io.IOException;
 import java.net.*;
 
-public class IsLinkBroken {
+public class ServerResponse {
 
 	public static String response(URL url) throws IOException {
 
