@@ -6,7 +6,7 @@ import java.net.*;
 
 public class IsLinkBroken {
 
-	public static String brokenlink(URL url) throws IOException {
+	public static String response(URL url) throws IOException {
 
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
