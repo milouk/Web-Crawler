@@ -35,7 +35,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 			if (link != null) {
 				
 				
-				links.add(link)
+				links.add(link);
 				
 
 						}
