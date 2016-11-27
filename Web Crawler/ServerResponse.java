@@ -1,5 +1,5 @@
 
-/* *Class For getting HTTP responses from server of whether a URL is ok or not. */
+/* **Class For getting HTTP responses from server of whether a URL is ok or not. */
 
 import java.io.IOException;
 import java.net.*;
