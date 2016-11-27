@@ -10,7 +10,7 @@ public class Database {
 	public void InsertData(ArrayList<URL> array, String path) {
 	    Statement stmt = dbcon.createStatement();
 	    for(int i = 0; i < array.size(); i++) {
-	        stmt.executeUpdate("INSERT INTO DatabaseOfURLs"+"VALUES(array.get(i), path + i + '.html')");
+	        stmt.executeUpdate("INSERT INTO DatabaseOfURLs"+"VALUES(array.get(i), path + '\' + Integer.toString(i) + '.html')");
 		}
 	    stmt.close();
 	}
