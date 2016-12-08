@@ -36,3 +36,28 @@ public class Mainclass {
 	public static Scanner inputpath;
 	public static Scanner yorn;
 	public static Scanner mail;
+
+    public static void main(final String[] args) throws Exception {
+
+		input = new Scanner(System.in);
+		inputpath = new Scanner(System.in);
+		yorn = new Scanner(System.in);
+		mail = new Scanner(System.in);
+
+		// Ask user to send an email when process finishes
+		System.out.print("Would you like the results to be sent in an email? [Y/N] : ");
+		answer = yorn.next().charAt(0);
+
+		while (answer != 'Y' && answer != 'y' && answer != 'N' && answer != 'n') {
+
+			System.out.printf("%s", "Please Enter a Valid Answer : ");
+			answer = yorn.next().charAt(0);
+		}
+
+		// Acquire Users Email
+		if (answer == 'y' || answer == 'Y') {
+
+			System.out.printf("%s", "Enter a Valid Email : ");
+			email = mail.nextLine();
+
+		}
