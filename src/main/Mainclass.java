@@ -6,16 +6,16 @@ import java.util.Set;
 
 public class Mainclass {
 
-	public static int layers = 1; // Default layers is 1
-	public static char answer;
-	public static String email;
-	public static String path; // Path of output
-	public static String t1name; // thread 1 name
-	public static String t2name; // thread 2 name+
-	public static String t3name; // thread 3 name
-	public static String link1 = "https://github.com/milouk";
-	public static String link2 = "https://review.cyanogenmod.org/";
-	public static String link3 = "https://www.cmxlog.com/13";
+	private static int layers = 1; // Default layers is 1
+	private static char answer;
+	private static String email;
+	private static String path; // Path of output
+	private static String t1name; // thread 1 name
+	private static String t2name; // thread 2 name+
+	private static String t3name; // thread 3 name
+	private static String link1 = "https://github.com/milouk";
+	private static String link2 = "https://review.cyanogenmod.org/";
+	private static String link3 = "https://www.cmxlog.com/13";
 
 	// thread 1 result list
 	public static ArrayList<String> thread1_list = new ArrayList<String>();
@@ -33,9 +33,32 @@ public class Mainclass {
 	public static ArrayList<String> finalist = new ArrayList<String>();
 
 	private static Scanner input;
-	public static Scanner inputpath;
-	public static Scanner yorn;
-	public static Scanner mail;
+	private static Scanner inputpath;
+	private static Scanner yorn;
+	private static Scanner mail;
+
+	//Gets for thread names
+	public String getT1name() {
+		return t1name;
+	}
+	public String getT2name() {
+		return t2name;
+	}
+	public String getT3name() {
+		return t3name;
+	}
+
+	//Gets for links
+	public String getLink1() {
+		return link1;
+	}
+	public String getLink2() {
+		return link2;
+	}
+	public String getLink3() {
+		return link3;
+	}
+
 
     public static void main(final String[] args) throws Exception {
 
