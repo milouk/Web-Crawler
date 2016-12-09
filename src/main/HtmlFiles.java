@@ -27,6 +27,18 @@ public class HtmlFiles {
 				path = ((path.concat("\\")).concat(Integer.toString(index)).concat(".html"));
 				filepath = Paths.get(path);
 				Files.write(filepath, lines, Charset.forName("UTF-8"));
+			} else {
+
+				do {
+					System.out.printf("%s", "Enter valid path : ");
+					path = Mainclass.inputpath.nextLine();
+					filepath = Paths.get(path);
+				} while (!Files.exists(filepath));
+
+				Mainclass.path = path;
+				path = ((path.concat("\\")).concat(Integer.toString(index)).concat(".html"));
+				filepath = Paths.get(path);
+				Files.write(filepath, lines, Charset.forName("UTF-8"));
 			}
 	}
 }
