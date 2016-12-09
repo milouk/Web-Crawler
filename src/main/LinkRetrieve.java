@@ -30,6 +30,22 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 					link = a.getAttribute(HTML.Attribute.HREF).toString();
 
 					if (link != null) {
+						
+						if (link.startsWith("http") && link.contains("://") && !link.contains("://dl.")) {
+
+					try {
+
+						// check if link broken... if not returns "OK"
+						if (ServerResponse.response(new URL(link)).equals("OK") && MediaCheck.media(new URL(link))) {
+
+							// Avoid Getting Thrown Out From The Server (finally
+							// turn 1 to 2000)
+							try {
+
+								Thread.sleep(1);
+
+							} catch (Exception e) {
+							}
 					}
 				}
 			}
