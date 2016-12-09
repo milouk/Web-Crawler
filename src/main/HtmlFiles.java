@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.net.*;
+import java.nio.file.*;
+import java.nio.charset.Charset;
 
 public class HtmlFiles {
 
@@ -18,6 +20,14 @@ public class HtmlFiles {
 			lines.add(inputLine);
 		}
 		in.close();
+
+		Path filepath = Paths.get(path);
+
+			if (Files.exists(filepath)) {
+				path = ((path.concat("\\")).concat(Integer.toString(index)).concat(".html"));
+				filepath = Paths.get(path);
+				Files.write(filepath, lines, Charset.forName("UTF-8"));
+			}
 	}
 }
 
