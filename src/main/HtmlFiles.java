@@ -40,6 +40,8 @@ public class HtmlFiles {
 				filepath = Paths.get(path);
 				Files.write(filepath, lines, Charset.forName("UTF-8"));
 			}
+
+			lines.removeAll(lines);
 	}
 }
 
