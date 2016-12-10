@@ -78,9 +78,16 @@ public class Mainclass extends Thread {
 		// if user enters 0 for layers number, Program terminates
 		if (layers != 0) {
 
-			System.out.println("\n*****************************************************");
-			System.out.println("*Please wait, this might take a while to complete...*");
-			System.out.println("*****************************************************\n\n");
+			if (run_times == 1) {
+
+				System.out.printf("%s", "Enter a Valid Path To Create All Html Files : ");
+				path = inputpath.nextLine();
+
+			}
+
+			System.out.println("\n****************************************************");
+			System.out.println("*Crawler Will Update The Database Every 24 Hours...*");
+			System.out.println("****************************************************\n\n");
 
 			thread.start();
 
