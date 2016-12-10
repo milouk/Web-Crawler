@@ -14,6 +14,7 @@ public class Mainclass extends Thread {
 	private static int layers = 1; // Default layers is 1
 	private static char answer; // If user desires or not to receive a result
 								// email
+    private static long timer; // store time
 	private static String email; // User email
 	private static String path; // Path of output
 	private static String t1name; // thread 1 name
