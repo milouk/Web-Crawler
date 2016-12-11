@@ -100,3 +100,31 @@ public class Mainclass extends Thread {
 
 	}
 
+	@Override
+		public final void run() {
+
+			for (;;) {
+
+				System.out.println("Running for " + run_times + " time!");
+
+				try {
+
+					crawl();
+
+				} catch (Exception e) {
+				}
+
+				run_times++;
+
+				try {
+
+					Thread.sleep(4000);
+
+				} catch (InterruptedException e) {
+
+				}
+
+			}
+
+	}
+
