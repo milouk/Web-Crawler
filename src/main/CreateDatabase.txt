@@ -1,7 +1,7 @@
 Create Table DatabaseOfURLs (
-position int,
-urls char(100),
-path char(100),
+Position int,
+URLS char(100),
+Path char(100),
 PRIMARY KEY(position) )
 
 /* Drop Table DatabaseofUrls */
