@@ -101,30 +101,120 @@ public class Mainclass extends Thread {
 	}
 
 	@Override
-		public final void run() {
+	public final void run() {
 
-			for (;;) {
+		for (;;) {
 
-				System.out.println("Running for " + run_times + " time!");
+			System.out.println("Running for " + run_times + " time!");
 
-				try {
+			try {
 
-					crawl();
+				crawl();
 
-				} catch (Exception e) {
-				}
+			} catch (Exception e) {
+			}
 
-				run_times++;
+			run_times++;
 
-				try {
+			try {
 
-					Thread.sleep(4000);
+				Thread.sleep(4000);
 
-				} catch (InterruptedException e) {
-
-				}
+			} catch (InterruptedException e) {
 
 			}
 
+		}
+
+
+	}
+
+
+	public static int getRun_times() {
+		return run_times;
+	}
+
+	public static int getLayers() {
+		return layers;
+	}
+
+	public static ArrayList<String> getThread1_list() {
+		return thread1_list;
+	}
+
+	public static Set<String> getThread1_set() {
+		return thread1_set;
+	}
+
+	public static ArrayList<String> getThread2_list() {
+		return thread2_list;
+	}
+
+	public static void setThread2_list(ArrayList<String> thread2_list) {
+		Mainclass.thread2_list = thread2_list;
+	}
+
+	public static Set<String> getThread2_set() {
+		return thread2_set;
+	}
+
+	public static ArrayList<String> getThread3_list() {
+		return thread3_list;
+	}
+
+	public static Set<String> getThread3_set() {
+		return thread3_set;
+	}
+
+	public static ArrayList<String> getFinalist() {
+		return finalist;
+	}
+
+	public static void setPath(String path) {
+		Mainclass.path = path;
+	}
+
+	public static String getT1name() {
+		return t1name;
+	}
+
+	public static void setT1name(String t1name) {
+		Mainclass.t1name = t1name;
+	}
+
+	public static String getT2name() {
+		return t2name;
+	}
+
+	public static void setT2name(String t2name) {
+		Mainclass.t2name = t2name;
+	}
+
+	public static String getT3name() {
+		return t3name;
+	}
+
+	public static void setT3name(String t3name) {
+		Mainclass.t3name = t3name;
+	}
+
+	public static String getLink1() {
+		return link1;
+	}
+
+	public static String getLink2() {
+		return link2;
+	}
+
+	public static Scanner getInputpath() {
+		return inputpath;
+	}
+
+	public static String getLink3() {
+		return link3;
+	}
+
+	public static long getTimer() {
+		return timer;
 	}
 
