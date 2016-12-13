@@ -30,23 +30,30 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 					link = a.getAttribute(HTML.Attribute.HREF).toString();
 
 					if (link != null) {
-						
-						if (link.startsWith("http") && link.contains("://") && !link.contains("://dl.")) {
 
-					try {
+					    if (!(link.endsWith(".jpeg") || link.endsWith(".jpg") || link.endsWith(".zip") || link.endsWith(".tar")
+						|| link.endsWith(".mp") || link.contains("://dl."))) {
 
-						// check if link broken... if not returns "OK"
-						if (ServerResponse.response(new URL(link)).equals("OK") && MediaCheck.media(new URL(link))) {
+					if (link.startsWith("http") && link.contains("://")) {
 
-							// Avoid Getting Thrown Out From The Server (finally
-							// turn 1 to 2000)
-							try {
+						try {
 
-								Thread.sleep(1);
+							// check if link broken... if not returns "OK"
+							if (ServerResponse.response(new URL(link)).equals("OK")
+									&& MediaCheck.media(new URL(link))) {
 
-							} catch (Exception e) {
-							}
-					}
-				}
-			}
-		}
+								// If thread 1 then
+								if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
+
+									Mainclass.getThread1_list().add(link);
+
+									// if thread 2 then
+								} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
+
+									Mainclass.getThread2_list().add(link);
+
+									// if thread 3 then
+								} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
+
+									Mainclass.getThread3_list().add(link);
+								}
