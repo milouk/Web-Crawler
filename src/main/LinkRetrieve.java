@@ -17,9 +17,11 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 		URL url = new URL(link);
 
-		Reader reader = new InputStreamReader((InputStream) url.getContent());
+		URL url = new URL(link);
 
-		new ParserDelegator().parse(reader, new LinkRetrieve(), true);
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
 	}
 
