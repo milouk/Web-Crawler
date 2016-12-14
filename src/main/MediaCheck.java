@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 public class MediaCheck {
 
-    public static void media(URL url) {
+    public static boolean media(URL url) {
 
 	    Image image = null;
         try {
@@ -18,5 +18,15 @@ public class MediaCheck {
             System.err.println(e);
 
         }
+
+        if (image != null) {
+
+			return false;
+
+		} else {
+
+			return true;
+
+		}
     }
  }
