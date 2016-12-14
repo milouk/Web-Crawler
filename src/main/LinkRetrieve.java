@@ -32,7 +32,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 					if (link != null) {
 
 					    if (!(link.endsWith(".jpeg") || link.endsWith(".jpg") || link.endsWith(".zip") || link.endsWith(".tar")
-						|| link.endsWith(".mp") || link.contains("://dl."))) {
+						|| link.endsWith(".mp") || link.endsWith(".pdf") || link.contains("://dl.")
+						|| link == "javascript:void(0)") || link.endsWith(".png") || link.endsWith(".gz")
+						|| link.endsWith(".gif") || link.endsWith(".css") || link.endsWith(".gif")) {
 
 					if (link.startsWith("http") && link.contains("://")) {
 
