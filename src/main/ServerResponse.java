@@ -5,17 +5,20 @@ import java.net.*;
 
 public class ServerResponse {
 
-	public static void response(URL url) throws IOException {
+	public static String response(URL url) throws IOException {
 
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
 		try {
 
 			connection.connect();
+			String response = connection.getResponseMessage();
+			connection.disconnect();
+			return response;
 
 		} catch (Exception exp) {
 
-		    System.err.println(exp.getMessage());
+		    return exp.getMessage();
 
 		}
 	}
