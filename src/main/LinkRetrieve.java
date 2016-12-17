@@ -1,9 +1,15 @@
+package com.complet;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import javax.swing.text.html.parser.*;
-import javax.swing.text.html.*;
-import javax.swing.text.*;
-import java.io.*;
-import java.util.*;
+import java.util.Enumeration;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.parser.ParserDelegator;
 
 public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
@@ -11,9 +17,11 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 		URL url = new URL(link);
 
-		Reader reader = new InputStreamReader((InputStream) url.getContent());
+		URL url = new URL(link);
 
-		new ParserDelegator().parse(reader, new LinkRetrieve(), true);
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
 	}
 
@@ -32,7 +40,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 					if (link != null) {
 
 					    if (!(link.endsWith(".jpeg") || link.endsWith(".jpg") || link.endsWith(".zip") || link.endsWith(".tar")
-						|| link.endsWith(".mp") || link.contains("://dl."))) {
+						|| link.endsWith(".mp") || link.endsWith(".pdf") || link.contains("://dl.")
+						|| link == "javascript:void(0)") || link.endsWith(".png") || link.endsWith(".gz")
+						|| link.endsWith(".gif") || link.endsWith(".css") || link.endsWith(".gif")) {
 
 					if (link.startsWith("http") && link.contains("://")) {
 
