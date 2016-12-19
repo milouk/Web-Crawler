@@ -12,6 +12,25 @@ import java.util.ArrayList;
 public class HtmlFiles {
 
 	public static ArrayList<String> lines = new ArrayList<String>();
+	private static Path filepath;
+	
+	public static void checkPath(String path) {
+
+		if (Files.exists(Paths.get(path))) {
+			File theDir = new File(path.concat("\\HTML_Files"));
+			theDir.mkdir();
+			Mainclass.setPath(path.concat("\\HTML_Files"));
+			Mainclass.setPath2(path.concat("\\HTML_Files"));
+
+		} else {
+
+			System.out.printf("%s", "Enter valid path : ");
+			path = Mainclass.getInputpath().nextLine();
+			checkPath(path);
+		}
+	}
+	
+	
 
 	public static void createFile(String link, String path, int index) throws IOException {
 
