@@ -141,6 +141,27 @@ public class Mainclass extends Thread {
 		thread1_list.removeAll(thread1_list);
 		thread2_list.removeAll(thread2_list);
 		thread3_list.removeAll(thread3_list);
+
+		System.out.println("Creating HTML Files in : " + path + " !...");
+
+
+
+		for (int i = 0; i < finalist.size(); i++) {
+
+			try {
+
+				HtmlFiles.createFile(finalist.get(i), path, i);
+
+				try {
+
+					Thread.sleep(1000);
+
+				} catch (InterruptedException e) {
+				}
+
+			} catch (FileNotFoundException e) {
+			}
+		}
 	}
 
 
