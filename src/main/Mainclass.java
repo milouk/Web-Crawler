@@ -129,6 +129,20 @@ public class Mainclass extends Thread {
 
 	}
 
+	public static void crawl() throws Exception {
+
+		// Create & Start Threads
+		RunClass.begin();
+
+		// Concatenate all lists to final list
+		finalist.addAll(thread1_list);
+		finalist.addAll(thread2_list);
+		finalist.addAll(thread3_list);
+		thread1_list.removeAll(thread1_list);
+		thread2_list.removeAll(thread2_list);
+		thread3_list.removeAll(thread3_list);
+	}
+
 
 	public static int getRun_times() {
 		return run_times;
