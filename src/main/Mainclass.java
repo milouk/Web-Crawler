@@ -144,7 +144,17 @@ public class Mainclass extends Thread {
 
 		System.out.println("Creating HTML Files in : " + path + " !...");
 
+		// Delete Old Files in order to replace them with new ones.
+		if (Mainclass.getRun_times() > 1) {
 
+			file_number = new File(path).listFiles().length;
+
+			for (int i = 0; i < file_number; i++) {
+
+				Files.delete(Paths.get((path.concat("\\")).concat(Integer.toString(i)).concat(".html")));
+
+			}
+		}
 
 		for (int i = 0; i < finalist.size(); i++) {
 
