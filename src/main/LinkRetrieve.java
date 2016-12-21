@@ -98,4 +98,28 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									Mainclass.getThread3_list().add(link);
 								}
 				             }
+					     } catch (IOException e) {
+
+							 System.err.println(e);
 					     }
+
+                        } else {
+
+							// If thread 1 root link concatenate
+						    if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
+
+								link = Mainclass.getLink1() + link.replaceFirst("//", "/");
+
+							    // if thread 2 root link concatenate
+							} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
+
+								    link = Mainclass.getLink2() + link.replaceFirst("//", "/");
+
+									// if thread 3 root link concatenate
+						    } else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
+
+							    link = Mainclass.getLink3() + link.replaceFirst("//", "/");
+						    }
+
+
+
