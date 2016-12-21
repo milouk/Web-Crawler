@@ -35,11 +35,34 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 
 				if (content.contains("nofollow")) {
 
+					if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
+
+						RunClass.robot_thread1 = false;
+
+					} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
+
+						RunClass.robot_thread2 = false;
+
+					} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
+
+						RunClass.robot_thread3 = false;
+					}
 
 
 				} else {
 
+					if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
 
+						RunClass.robot_thread1 = true;
+
+					} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
+
+						RunClass.robot_thread2 = true;
+
+					} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
+
+						RunClass.robot_thread3 = true;
+					}
 
 				}
 			}
