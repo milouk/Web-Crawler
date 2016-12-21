@@ -23,3 +23,26 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 		new ParserDelegator().parse(reader, new RobotTags(), true);
 
 	}
+
+	@Override
+	public void handleSimpleTag(HTML.Tag t, MutableAttributeSet a, int pos) {
+
+		if (t == HTML.Tag.META) {
+
+			String content = (String) a.getAttribute(HTML.Attribute.CONTENT);
+
+			if (content != null && content.contains("index")) {
+
+				if (content.contains("nofollow")) {
+
+
+
+				} else {
+
+
+
+				}
+			}
+		}
+	}
+}
