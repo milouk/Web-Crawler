@@ -2,8 +2,8 @@ package com.complet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
 import javax.swing.text.MutableAttributeSet;
@@ -13,15 +13,19 @@ import javax.swing.text.html.parser.ParserDelegator;
 
 public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
-	public static void start(String link) throws Exception {
+	public static void start(String link)  {
 
-		URL url = new URL(link);
+		try {
+			URL url= new URL(link);
 
-		URL url = new URL(link);
+             BufferedReader reader = new BufferedReader(new InputStreamReader((InputStream) url.getContent()));
 
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+             new ParserDelegator().parse(reader, new LinkRetrieve(), true);
 
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	    } catch (IOException e) {
+
+			System.err.println("URL was malformed!");
+	    }
 
 	}
 
