@@ -44,9 +44,8 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 					if (link != null) {
 
 					    if (!(link.endsWith(".jpeg") || link.endsWith(".jpg") || link.endsWith(".zip") || link.endsWith(".tar")
-						|| link.endsWith(".mp") || link.endsWith(".pdf") || link.contains("://dl.")
-						|| link == "javascript:void(0)") || link.endsWith(".png") || link.endsWith(".gz")
-						|| link.endsWith(".gif") || link.endsWith(".css") || link.endsWith(".gif")) {
+						|| link.endsWith(".mp") || link.endsWith(".pdf") || link.contains("://dl."))) {
+
 
 					if (link.startsWith("http") && link.contains("://")) {
 
@@ -74,7 +73,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 					      } catch (IOException e) {
 
-					          System.err.println(e);
+					          System.err.println("Something Went Wrong...Chill");
 					      }
 
 				    } else if (link.startsWith("//")) {
@@ -104,7 +103,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 				             }
 					     } catch (IOException e) {
 
-							 System.err.println(e);
+							 System.err.println("Something Went Wrong...Chill");
 					     }
 
                         } else {
@@ -151,7 +150,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 						     } catch (IOException e) {
 
-								 System.err.println(e);
+								 System.err.println("Something Went Wrong...Chill");
 						     }
 
 					     }
@@ -159,11 +158,10 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 					  			}
 
 					  			// Avoid Getting Thrown Out From The Server
-					  			// (finally
-					  			// turn 1 to 2000)
+
 					  			try {
 
-					  				Thread.sleep(1000);
+					  				Thread.sleep(600);
 
 					  			} catch (Exception e) {
 					  			}
@@ -173,6 +171,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 					  	}
 
 }
+
 
 
 
