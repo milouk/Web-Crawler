@@ -2,8 +2,8 @@ package com.complet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Enumeration;
 import javax.swing.text.MutableAttributeSet;
@@ -13,15 +13,19 @@ import javax.swing.text.html.parser.ParserDelegator;
 
 public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
-	public static void start(String link) throws Exception {
+	public static void start(String link)  {
 
-		URL url = new URL(link);
+		try {
+			URL url= new URL(link);
 
-		URL url = new URL(link);
+             BufferedReader reader = new BufferedReader(new InputStreamReader((InputStream) url.getContent()));
 
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+             new ParserDelegator().parse(reader, new LinkRetrieve(), true);
 
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	    } catch (IOException e) {
+
+			System.err.println("URL was malformed!");
+	    }
 
 	}
 
@@ -40,9 +44,8 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 					if (link != null) {
 
 					    if (!(link.endsWith(".jpeg") || link.endsWith(".jpg") || link.endsWith(".zip") || link.endsWith(".tar")
-						|| link.endsWith(".mp") || link.endsWith(".pdf") || link.contains("://dl.")
-						|| link == "javascript:void(0)") || link.endsWith(".png") || link.endsWith(".gz")
-						|| link.endsWith(".gif") || link.endsWith(".css") || link.endsWith(".gif")) {
+						|| link.endsWith(".mp") || link.endsWith(".pdf") || link.contains("://dl."))) {
+
 
 					if (link.startsWith("http") && link.contains("://")) {
 
@@ -70,7 +73,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 					      } catch (IOException e) {
 
-					          System.err.println(e);
+					          System.err.println("Something Went Wrong...Chill");
 					      }
 
 				    } else if (link.startsWith("//")) {
@@ -98,4 +101,84 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									Mainclass.getThread3_list().add(link);
 								}
 				             }
+					     } catch (IOException e) {
+
+							 System.err.println("Something Went Wrong...Chill");
 					     }
+
+                        } else {
+
+							// If thread 1 root link concatenate
+						    if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
+
+								link = Mainclass.getLink1() + link.replaceFirst("//", "/");
+
+							    // if thread 2 root link concatenate
+							} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
+
+								    link = Mainclass.getLink2() + link.replaceFirst("//", "/");
+
+									// if thread 3 root link concatenate
+						    } else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
+
+							    link = Mainclass.getLink3() + link.replaceFirst("//", "/");
+						    }
+
+						    try {
+
+								if (ServerResponse.response(new URL(link)).equals("OK")
+										&& MediaCheck.media(new URL(link))) {
+
+									// If thread 1 then
+									if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
+
+										Mainclass.getThread1_list().add(link);
+
+								        // If thread 1 then
+								    } else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
+
+										Mainclass.getThread2_list().add(link);
+
+										// if thread 3 then
+									} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
+
+									    Mainclass.getThread3_list().add(link);
+
+									}
+
+							     }
+
+						     } catch (IOException e) {
+
+								 System.err.println("Something Went Wrong...Chill");
+						     }
+
+					     }
+					  	}
+					  			}
+
+					  			// Avoid Getting Thrown Out From The Server
+
+					  			try {
+
+					  				Thread.sleep(600);
+
+					  			} catch (Exception e) {
+					  			}
+
+					  		}
+
+					  	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
