@@ -1,7 +1,5 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
@@ -9,14 +7,15 @@ import java.util.Set;
 
 public class Mainclass extends Thread {
 
-	private static int file_number; // number of files is a directory
-	private static int run_times = 1;
+	private static int run_times = 1; // Counts the times crawler has ran
 	private static int layers = 1; // Default layers is 1
 	private static char answer; // If user desires or not to receive a result
 								// email
     private static long timer; // store time
 	private static String email; // User email
 	private static String path; // Path of output
+	private static int position = 1;
+	private static String path2; // Root path of link folders
 	private static String t1name; // thread 1 name
 	private static String t2name; // thread 2 name
 	private static String t3name; // thread 3 name
@@ -82,6 +81,7 @@ public class Mainclass extends Thread {
 
 				System.out.printf("%s", "Enter a Valid Path To Create All Html Files : ");
 				path = inputpath.nextLine();
+				HtmlFiles.checkPath(path);
 
 			}
 
@@ -92,6 +92,12 @@ public class Mainclass extends Thread {
 			thread.start();
 
 		} else {
+
+			if (answer == 'Y' || answer == 'y') {
+				GetCredentials.emailCredentials(
+						"C:\\Users\\Michalis\\Business\\DMST\\3rd Semester\\Programming II\\workplace\\Web Crawler\\src\\com\\complet\\EmailCredentials.txt");
+				EmailSending.email(email);
+			}
 
 			System.out.println("\n************");
 			System.out.println("* Finished *");
@@ -117,7 +123,7 @@ public class Mainclass extends Thread {
 			run_times++;
 
 			try {
-
+                // to be changed to 86400 * 1000
 				Thread.sleep(4000);
 
 			} catch (InterruptedException e) {
@@ -142,37 +148,75 @@ public class Mainclass extends Thread {
 		thread2_list.removeAll(thread2_list);
 		thread3_list.removeAll(thread3_list);
 
-		System.out.println("Creating HTML Files in : " + path + " !...");
+		/// REMOVING
+		System.out.println(finalist.size());
+		RobotTags.remover();
+		System.out.println(finalist.size());
+		/// END OF REMOVING
 
-		// Delete Old Files in order to replace them with new ones.
-		if (Mainclass.getRun_times() > 1) {
-
-			file_number = new File(path).listFiles().length;
-
-			for (int i = 0; i < file_number; i++) {
-
-				Files.delete(Paths.get((path.concat("\\")).concat(Integer.toString(i)).concat(".html")));
-
-			}
+		if (answer == 'Y' || answer == 'y') {
+			GetCredentials.emailCredentials(
+					"C:\\Users\\Michalis\\Business\\DMST\\3rd Semester\\Programming II\\workplace\\Web Crawler\\src\\com\\complet\\EmailCredentials.txt");
+			EmailSending.email(email);
 		}
 
-		for (int i = 0; i < finalist.size(); i++) {
+		System.out.println("Creating HTML Files in : " + path + " !...");
 
-			try {
 
-				HtmlFiles.createFile(finalist.get(i), path, i);
+
+	// Delete Old Files in order to replace them with new ones.
+			if (Mainclass.getRun_times() > 1) {
+
+				File dir = new File(path2);
+				HtmlFiles.deleteDirectory(dir);
+				dir.mkdir();
+				// GetCredentials.dbCredentials("db credentials.txt path");
+				// DatabaseConnection.deleteData("DatabaseOfURLs");
+			}
+
+			for (int i = 0; i < finalist.size(); i++) {
 
 				try {
 
-					Thread.sleep(1000);
+					if (i == 0) {
+						path = path2.concat("\\1-100");
+						File theDir = new File(path);
+						theDir.mkdir();
 
-				} catch (InterruptedException e) {
+					} else if (i % 100 == 0) {
+						path = path2.concat("\\")
+								.concat(String.valueOf(i + 1).concat(" - ").concat(String.valueOf(i + 100)));
+						File theDir = new File(path);
+						theDir.mkdir();
+
+					}
+
+					HtmlFiles.createFile(finalist.get(i), path, i + 1);
+					Database.insertData(finalist.get(i), path);
+					position++;
+
+					try {
+
+						Thread.sleep(800);
+
+					} catch (InterruptedException e) {
+					}
+
+				} catch (IOException e) {
+
+					System.err.println("IO Exception Handled");
+
 				}
-
-			} catch (FileNotFoundException e) {
 			}
+
+			// Empty Finalist for Next Run
+			finalist.removeAll(finalist);
+
+			System.out.println("\n************");
+			System.out.println("* Finished *");
+		    System.out.println("************\n\n");
 		}
-	}
+
 
 
 	public static int getRun_times() {
@@ -193,10 +237,6 @@ public class Mainclass extends Thread {
 
 	public static ArrayList<String> getThread2_list() {
 		return thread2_list;
-	}
-
-	public static void setThread2_list(ArrayList<String> thread2_list) {
-		Mainclass.thread2_list = thread2_list;
 	}
 
 	public static Set<String> getThread2_set() {
@@ -262,4 +302,21 @@ public class Mainclass extends Thread {
 	public static long getTimer() {
 		return timer;
 	}
+
+	public static int getPosition() {
+		return position;
+	}
+
+	public static String getPath2() {
+		return path2;
+	}
+
+	public static void setPath2(String path2) {
+		Mainclass.path2 = path2;
+	}
+
+	public static String getPath() {
+		return path;
+    }
+}
 
