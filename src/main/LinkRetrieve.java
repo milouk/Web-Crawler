@@ -35,7 +35,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 			System.err.println("This URL was malformed --> " + link + " !");
 		}
-
 	}
 
 	@Override
@@ -84,15 +83,19 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-                                        //Checks link's robot's content
-                                        //I only care if it's indexalbe or followable
-                                        //If link is suitable for me i take it !
-                                        //(The noindexables which may stay will be removed after i make use of them)
-                                        RobotTags.checkAccess(link);
-                                        if (RunClass.robotIndex_thread1 == true || RunClass.robotFollow_thread1 == true) {
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
+										RobotTags.checkAccess(link);
+										if (RunClass.robotIndex_thread1 == true
+												|| RunClass.robotFollow_thread1 == true) {
 
-										    Mainclass.getThread1_list().add(link);
-										    if (RunClass.robotFollow_thread1 == true) {
+											Mainclass.getThread1_list().add(link);
+											if (RunClass.robotFollow_thread1 == true) {
 												RobotTags.thread1_mFollow.add(true);
 											} else {
 												RobotTags.thread1_mFollow.add(false);
@@ -103,8 +106,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread1_mIndex.add(false);
 											}
-
-
 										}
 
 									}
@@ -121,13 +122,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-
-										//Checks link's robot's content
-									    //I only care if it's indexalbe or followable
-										//If link is suitable for me i take it !
-                                        //(The noindexables which may stay will be removed after i make use of them)
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
 										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread2 == true || RunClass.robotFollow_thread2 == true) {
+										if (RunClass.robotIndex_thread2 == true
+												|| RunClass.robotFollow_thread2 == true) {
 
 											Mainclass.getThread2_list().add(link);
 											if (RunClass.robotFollow_thread2 == true) {
@@ -141,8 +145,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread2_mIndex.add(false);
 											}
-
-									    }
+										}
 									}
 								}
 
@@ -157,12 +160,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-										//Checks link's robot's content
-										//I only care if it's indexalbe or followable
-										//If link is suitable for me i take it !
-										//(The noindexables which may stay will be removed after i make use of them)
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
 										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread3 == true || RunClass.robotFollow_thread3 == true) {
+										if (RunClass.robotIndex_thread3 == true
+												|| RunClass.robotFollow_thread3 == true) {
 
 											Mainclass.getThread3_list().add(link);
 											if (RunClass.robotFollow_thread3 == true) {
@@ -176,8 +183,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread3_mIndex.add(false);
 											}
-
-
 										}
 									}
 								}
@@ -206,12 +211,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-										//Checks link's robot's content
-										//I only care if it's indexalbe or followable
-										//If link is suitable for me i take it !
-										//(The noindexables which may stay will be removed after i make use of them)
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
 										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread1 == true || RunClass.robotFollow_thread1 == true) {
+										if (RunClass.robotIndex_thread1 == true
+												|| RunClass.robotFollow_thread1 == true) {
 
 											Mainclass.getThread1_list().add(link);
 											if (RunClass.robotFollow_thread1 == true) {
@@ -225,8 +234,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread1_mIndex.add(false);
 											}
-
-
 										}
 									}
 								}
@@ -242,12 +249,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-										//Checks link's robot's content
-										//I only care if it's indexalbe or followable
-										//If link is suitable for me i take it !
-										//(The noindexables which may stay will be removed after i make use of them)
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
 										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread2 == true || RunClass.robotFollow_thread2 == true) {
+										if (RunClass.robotIndex_thread2 == true
+												|| RunClass.robotFollow_thread2 == true) {
 
 											Mainclass.getThread2_list().add(link);
 											if (RunClass.robotFollow_thread2 == true) {
@@ -261,8 +272,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread2_mIndex.add(false);
 											}
-
-
 										}
 									}
 								}
@@ -278,12 +287,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-										//Checks link's robot's content
-										//I only care if it's indexalbe or followable
-										//If link is suitable for me i take it !
-										//(The noindexables which may stay will be removed after i make use of them)
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
 										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread3 == true || RunClass.robotFollow_thread3 == true) {
+										if (RunClass.robotIndex_thread3 == true
+												|| RunClass.robotFollow_thread3 == true) {
 
 											Mainclass.getThread3_list().add(link);
 											if (RunClass.robotFollow_thread3 == true) {
@@ -297,8 +310,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread3_mIndex.add(false);
 											}
-
-
 										}
 									}
 								}
@@ -331,12 +342,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-										//Checks link's robot's content
-										//I only care if it's indexalbe or followable
-										//If link is suitable for me i take it !
-										//(The noindexables which may stay will be removed after i make use of them)
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
 										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread1 == true || RunClass.robotFollow_thread1 == true) {
+										if (RunClass.robotIndex_thread1 == true
+												|| RunClass.robotFollow_thread1 == true) {
 
 											Mainclass.getThread1_list().add(link);
 											if (RunClass.robotFollow_thread1 == true) {
@@ -350,8 +365,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread1_mIndex.add(false);
 											}
-
-
 										}
 									}
 								}
@@ -372,12 +385,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-										//Checks link's robot's content
-										//I only care if it's indexalbe or followable
-										//If link is suitable for me i take it !
-										//(The noindexables which may stay will be removed after i make use of them)
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
 										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread2 == true || RunClass.robotFollow_thread2 == true) {
+										if (RunClass.robotIndex_thread2 == true
+												|| RunClass.robotFollow_thread2 == true) {
 
 											Mainclass.getThread2_list().add(link);
 											if (RunClass.robotFollow_thread2 == true) {
@@ -391,9 +408,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread2_mIndex.add(false);
 											}
-
-
-
 										}
 									}
 								}
@@ -414,12 +428,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 									if (ServerResponse.response(new URL(link)).equals("OK")
 											&& MediaCheck.media(new URL(link))) {
 
-										//Checks link's robot's content
-										//I only care if it's indexalbe or followable
-										//If link is suitable for me i take it !
-										//(The noindexables which may stay will be removed after i make use of them)
+										// Checks link's robot's content
+										// I only care if it's indexalbe or
+										// followable
+										// If link is suitable for me i take it
+										// !
+										// (The noindexables which may stay will
+										// be removed after i make use of them)
 										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread3 == true || RunClass.robotFollow_thread3 == true) {
+										if (RunClass.robotIndex_thread3 == true
+												|| RunClass.robotFollow_thread3 == true) {
 
 											Mainclass.getThread3_list().add(link);
 											if (RunClass.robotFollow_thread3 == true) {
@@ -433,8 +451,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 												RobotTags.counter++;
 												RobotTags.thread3_mIndex.add(false);
 											}
-
-
 										}
 									}
 								}
@@ -447,10 +463,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 						}
 
 						// Avoid Getting Thrown Out From The Server
-
 						try {
 
-							Thread.sleep(1);
+							Thread.sleep(1500);
 
 						} catch (Exception e) {
 
@@ -462,14 +477,3 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
