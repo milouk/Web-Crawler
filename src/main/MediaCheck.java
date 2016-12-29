@@ -1,25 +1,24 @@
 package com.complet;
 
 import java.awt.Image;
+import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class MediaCheck {
 
-    public static boolean media(URL url) {
+	public static boolean media(URL url) {
 
-	    Image image = null;
-        try {
+		Image image = null;
 
-            image = ImageIO.read(url);
+		try {
 
-        } catch (Exception e) {
+			image = ImageIO.read(url);
 
-            System.err.println(e);
+		} catch (IOException e) {
+		}
 
-        }
-
-        if (image != null) {
+		if (image != null) {
 
 			return false;
 
@@ -28,5 +27,7 @@ public class MediaCheck {
 			return true;
 
 		}
-    }
- }
+
+	}
+
+}
