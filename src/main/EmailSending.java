@@ -16,6 +16,10 @@ public class EmailSending {
 		// Destination Email
 		String to = email;
 
+		GetCredentials.emailCredentials("d:\\Users\\Pan\\Desktop\\JAVA_KOMPLE\\EmailCredentials.txt");
+
+		String from = GetCredentials.getEmail();
+
 		String host = "pop.gmail.com";
 
 		// Get system properties
@@ -51,8 +55,14 @@ public class EmailSending {
 			// Set Subject: header field
 			message.setSubject("Επιτυχής Αποστολή");//
 
-			message.setText("Γεια σας,\nΤο πρόγραμμα μας κατάφερε να εκτελεστεί με επιτυχία"
-					+ "\nΕιδικότερα,");
+			message.setText("Η Phoneutria κατάφερε να εκτελέσει το έργο της με επιτυχία" + "\nΕιδικότερα,"
+					+ "\n\n•Έγινε αναζήτηση σε " + Mainclass.getLayers() + " επίπεδο(α)"
+					+ "\n\n•Χρησιμοποιήθηκαν τα εξής URL: \n•" + Mainclass.getLink1() + ", \n•" + Mainclass.getLink2()
+					+ ", \n•" + Mainclass.getLink3() + "\n\n•Δημιουργήθηκαν: " + Mainclass.getFinalist().size()
+					+ " αρχεία από τα αντίστοιχα links τα οποία έγιναν crawl" + "\n•Αυτή ήταν η "
+					+ Mainclass.getRun_times() + "η φορά που έτρεξε \n" + "\nΏρα Έναρξης: "
+					+ dateFormat.format(Mainclass.getDate()) + "\nΏρα Λήξης: " + dateFormat.format(date)
+					+ "\n\n\n•Η Βάση Δεδομένων θα ανανεωθεί σε 24 ώρες!");
 
 			// Send message
 			Transport.send(message);
