@@ -3,6 +3,7 @@ package com.complet;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -13,18 +14,17 @@ public class Mainclass extends Thread {
 	private static int layers = 1; // Default layers is 1
 	private static char answer; // If user desires or not to receive a result
 								// email
-	private static long timer; // store time
 	private static String email; // User email
 	private static String path; // Path of output
-	private static int position = 1;
-
+	private static int position;
+	private static Date date = null;// Store Time
 	private static String path2; // Root path of link folders
 	private static String t1name; // thread 1 name
 	private static String t2name; // thread 2 name
 	private static String t3name; // thread 3 name
-	private static String link1 = "https://gmail.com";
-	private static String link2 = "https://review.cyanogenmod.org/";
-	private static String link3 = "https://www.cmxlog.com/13";
+	private static String link1 = "https://review.cyanogenmod.org/";
+	private static String link2 = "https://gmail.com/";
+	private static String link3 = "https://www.cmxlog.com/14.1/";
 
 	// thread 1 result list
 	private static ArrayList<String> thread1_list = new ArrayList<String>();
@@ -67,6 +67,7 @@ public class Mainclass extends Thread {
 		// Acquire Users Email
 		if (answer == 'y' || answer == 'Y') {
 
+			setDate(date = new Date());
 			System.out.printf("%s", "Enter a Valid Email : ");
 			email = mail.nextLine();
 
@@ -96,10 +97,11 @@ public class Mainclass extends Thread {
 		} else {
 
 			if (answer == 'Y' || answer == 'y') {
+
+				setDate(date = new Date());
 				GetCredentials.emailCredentials(
 						"C:\\Users\\Michalis\\Business\\DMST\\3rd Semester\\Programming II\\workplace\\Web Crawler\\src\\com\\complet\\EmailCredentials.txt");
 				EmailSending.email(email);
-
 			}
 
 			System.out.println("\n************");
@@ -146,11 +148,11 @@ public class Mainclass extends Thread {
 		finalist.addAll(thread1_list);
 		finalist.addAll(thread2_list);
 		finalist.addAll(thread3_list);
+
+		// Clear everything and get it ready for next run
 		thread1_list.removeAll(thread1_list);
 		thread2_list.removeAll(thread2_list);
 		thread3_list.removeAll(thread3_list);
-
-		///REMOVING
 		RobotTags.mIndex.addAll(RobotTags.thread1_mIndex);
 		RobotTags.mIndex.addAll(RobotTags.thread2_mIndex);
 		RobotTags.mIndex.addAll(RobotTags.thread3_mIndex);
@@ -158,34 +160,29 @@ public class Mainclass extends Thread {
 		RobotTags.thread2_mIndex.removeAll(RobotTags.thread2_mIndex);
 		RobotTags.thread3_mIndex.removeAll(RobotTags.thread3_mIndex);
 
-		System.out.println("List's size: " + finalist.size());
-		System.out.println("The noindex links that stayed and need to be removed: " + RobotTags.counter);
-
 		if (RobotTags.mIndex.size() != 0) {
 			RobotTags.remover();
 		}
+
 		RobotTags.counter = 0;
 		RobotTags.mIndex.removeAll(RobotTags.mIndex);
-		System.out.println("List after the 'remove' section: " + finalist.size());
-        ///END OF REMOVING
 
 		if (answer == 'Y' || answer == 'y') {
 			GetCredentials.emailCredentials(
 					"C:\\Users\\Michalis\\Business\\DMST\\3rd Semester\\Programming II\\workplace\\Web Crawler\\src\\com\\complet\\EmailCredentials.txt");
 			EmailSending.email(email);
-
 		}
 
 		System.out.println("Creating HTML Files in : " + path2 + " !...");
 
-		// Delete Old Files in order to replace them with new ones.
+		// Delete Old Files and Database in order to replace them with new ones.
 		if (Mainclass.getRun_times() > 1) {
 
+			// DatabaseConnection.deleteData("DatabaseOfURLs");
 			File dir = new File(path2);
 			HtmlFiles.deleteDirectory(dir);
 			dir.mkdir();
-			// GetCredentials.dbCredentials("db credentials.txt path");
-			// DatabaseConnection.deleteData("DatabaseOfURLs");
+
 		}
 
 		for (int i = 0; i < finalist.size(); i++) {
@@ -196,7 +193,7 @@ public class Mainclass extends Thread {
 					path = path2.concat("\\1-100");
 					File theDir = new File(path);
 					theDir.mkdir();
-
+					position = 1;
 				} else if (i % 100 == 0) {
 					path = path2.concat("\\")
 							.concat(String.valueOf(i + 1).concat(" - ").concat(String.valueOf(i + 100)));
@@ -206,7 +203,7 @@ public class Mainclass extends Thread {
 				}
 
 				HtmlFiles.createFile(finalist.get(i), path, i + 1);
-				// Database.insertData(finalist.get(i), path);
+				// DatabaseConnection.insertData(finalist.get(i), path);
 				// position++;
 
 				try {
@@ -222,6 +219,9 @@ public class Mainclass extends Thread {
 
 			}
 		}
+
+		// Empty Finalist for Next Run
+		finalist.removeAll(finalist);
 
 		System.out.println("\n************");
 		System.out.println("* Finished *");
@@ -247,10 +247,6 @@ public class Mainclass extends Thread {
 
 	public static ArrayList<String> getThread2_list() {
 		return thread2_list;
-	}
-
-	public static void setThread2_list(ArrayList<String> thread2_list) {
-		Mainclass.thread2_list = thread2_list;
 	}
 
 	public static Set<String> getThread2_set() {
@@ -313,10 +309,6 @@ public class Mainclass extends Thread {
 		return link3;
 	}
 
-	public static long getTimer() {
-		return timer;
-	}
-
 	public static int getPosition() {
 		return position;
 	}
@@ -333,5 +325,12 @@ public class Mainclass extends Thread {
 		return path;
 	}
 
-}
+	public static Date getDate() {
+		return date;
+	}
 
+	public static void setDate(Date date) {
+		Mainclass.date = date;
+	}
+
+}
