@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.NoSuchElementException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLEditorKit;
@@ -13,18 +16,24 @@ import javax.swing.text.html.parser.ParserDelegator;
 
 public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
+	// Extensions to EXCLUDE
+    private final static Pattern excludes = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz|jpeg|pdf))$");
+
 	public static void start(String link)  {
 
 		try {
 			URL url= new URL(link);
 
-             BufferedReader reader = new BufferedReader(new InputStreamReader((InputStream) url.getContent()));
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new InputStreamReader(connection.getInputStream()));
 
              new ParserDelegator().parse(reader, new LinkRetrieve(), true);
 
 	    } catch (IOException e) {
 
-			System.err.println("URL was malformed!");
+			System.err.println("This URL was malformed --> " + link + " !");
 	    }
 
 	}
