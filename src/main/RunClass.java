@@ -2,8 +2,9 @@ package com.complet;
 
 public class RunClass extends Thread {
 
-	//These are going to help the RobotTags.checkAccess method to work properly
-	//In general, they tell if something is indexable or followable by true or false
+	// These are going to help the RobotTags.checkAccess method to work properly
+	// In general, they tell if something is indexable or followable by true or
+	// false
 	public static boolean robotFollow_thread1 = true;
 	public static boolean robotFollow_thread2 = true;
 	public static boolean robotFollow_thread3 = true;
@@ -37,7 +38,6 @@ public class RunClass extends Thread {
 		}
 
 		Mainclass.getFinalist().removeAll(Mainclass.getFinalist());
-
 	}
 
 	@Override
@@ -51,10 +51,9 @@ public class RunClass extends Thread {
 				RobotTags.checkAccess(Mainclass.getLink1());
 
 			} catch (Exception e) {
-
 				System.err.println(e);
-
 			}
+
 			if (robotFollow_thread1) {
 				// initial run thread 1 (link 1)
 				LinkRetrieve.start(Mainclass.getLink1());
@@ -63,15 +62,13 @@ public class RunClass extends Thread {
 				Mainclass.getThread1_set().addAll(Mainclass.getThread1_list());
 
 				// Empty List
-				Mainclass.getThread1_list().removeAll(
-						Mainclass.getThread1_list());
+				Mainclass.getThread1_list().removeAll(Mainclass.getThread1_list());
 
 				// Add Back To The List Only Unique Elements
 				Mainclass.getThread1_list().addAll(Mainclass.getThread1_set());
 
 				// Empty Set
-				Mainclass.getThread1_set()
-						.removeAll(Mainclass.getThread1_set());
+				Mainclass.getThread1_set().removeAll(Mainclass.getThread1_set());
 			}
 
 		} else if (currentThread().getName().equals(Mainclass.getT2name())) {
@@ -82,9 +79,9 @@ public class RunClass extends Thread {
 				RobotTags.checkAccess(Mainclass.getLink2());
 
 			} catch (Exception e) {
-
 				System.err.println(e);
 			}
+
 			if (robotFollow_thread2) {
 				// initial run thread 2 ( link 2)
 				LinkRetrieve.start(Mainclass.getLink2());
@@ -93,16 +90,15 @@ public class RunClass extends Thread {
 				Mainclass.getThread2_set().addAll(Mainclass.getThread2_list());
 
 				// Empty List
-				Mainclass.getThread2_list().removeAll(
-						Mainclass.getThread2_list());
+				Mainclass.getThread2_list().removeAll(Mainclass.getThread2_list());
 
 				// Add Back To The List Only Unique Elements
 				Mainclass.getThread2_list().addAll(Mainclass.getThread2_set());
 
 				// Empty Set
-				Mainclass.getThread2_set()
-						.removeAll(Mainclass.getThread2_set());
+				Mainclass.getThread2_set().removeAll(Mainclass.getThread2_set());
 			}
+
 		} else if (currentThread().getName().equals(Mainclass.getT3name())) {
 
 			// Check if robot tags exists and allows to follow links
@@ -111,9 +107,7 @@ public class RunClass extends Thread {
 				RobotTags.checkAccess(Mainclass.getLink3());
 
 			} catch (Exception e) {
-
 				System.err.println(e);
-
 			}
 
 			if (robotFollow_thread3) {
@@ -124,25 +118,21 @@ public class RunClass extends Thread {
 				Mainclass.getThread3_set().addAll(Mainclass.getThread3_list());
 
 				// Empty List
-				Mainclass.getThread3_list().removeAll(
-						Mainclass.getThread3_list());
+				Mainclass.getThread3_list().removeAll(Mainclass.getThread3_list());
 
 				// Add Back To The List Only Unique Elements
 				Mainclass.getThread3_list().addAll(Mainclass.getThread3_set());
 
 				// Empty Set
-				Mainclass.getThread3_set()
-						.removeAll(Mainclass.getThread3_set());
+				Mainclass.getThread3_set().removeAll(Mainclass.getThread3_set());
 			}
-
 		}
 
 		/*
 		 * First thread :
 		 */
 
-		if (currentThread().getName().equals(Mainclass.getT1name())
-				&& Mainclass.getThread1_list().size() != 0) {
+		if (currentThread().getName().equals(Mainclass.getT1name()) && Mainclass.getThread1_list().size() != 0) {
 
 			int starting_point = 0;
 
@@ -157,27 +147,21 @@ public class RunClass extends Thread {
 
 					// Check if robot tags allows to follow links
 
-
 					if (RobotTags.thread1_mFollow.get(starting_point)) {
 
-						LinkRetrieve.start(Mainclass.getThread1_list().get(
-								starting_point));
+						LinkRetrieve.start(Mainclass.getThread1_list().get(starting_point));
 
 						// Add All Elements In The List To The Set
-						Mainclass.getThread1_set().addAll(
-								Mainclass.getThread1_list());
+						Mainclass.getThread1_set().addAll(Mainclass.getThread1_list());
 
 						// Empty List
-						Mainclass.getThread1_list().removeAll(
-								Mainclass.getThread1_list());
+						Mainclass.getThread1_list().removeAll(Mainclass.getThread1_list());
 
 						// Add Back To The List Only Unique Elements
-						Mainclass.getThread1_list().addAll(
-								Mainclass.getThread1_set());
+						Mainclass.getThread1_list().addAll(Mainclass.getThread1_set());
 
 						// Empty Set
-						Mainclass.getThread1_set().removeAll(
-								Mainclass.getThread1_set());
+						Mainclass.getThread1_set().removeAll(Mainclass.getThread1_set());
 					}
 
 					starting_point++;
@@ -188,7 +172,6 @@ public class RunClass extends Thread {
 					ending_point = Mainclass.getThread1_list().size();
 
 				} else {
-
 					return;
 				}
 
@@ -198,8 +181,7 @@ public class RunClass extends Thread {
 			 * Second thread :
 			 */
 
-		} else if (currentThread().getName().equals(Mainclass.getT2name())
-				&& Mainclass.getThread2_list().size() != 0) {
+		} else if (currentThread().getName().equals(Mainclass.getT2name()) && Mainclass.getThread2_list().size() != 0) {
 
 			int starting_point = 0;
 
@@ -214,27 +196,21 @@ public class RunClass extends Thread {
 
 					// Check if robot tags allows to follow links
 
-
 					if (RobotTags.thread2_mFollow.get(starting_point)) {
 
-						LinkRetrieve.start(Mainclass.getThread2_list().get(
-								starting_point));
+						LinkRetrieve.start(Mainclass.getThread2_list().get(starting_point));
 
 						// Add All Elements In The List To The Set
-						Mainclass.getThread2_set().addAll(
-								Mainclass.getThread2_list());
+						Mainclass.getThread2_set().addAll(Mainclass.getThread2_list());
 
 						// Empty List
-						Mainclass.getThread2_list().removeAll(
-								Mainclass.getThread2_list());
+						Mainclass.getThread2_list().removeAll(Mainclass.getThread2_list());
 
 						// Add Back To The List Only Unique Elements
-						Mainclass.getThread2_list().addAll(
-								Mainclass.getThread2_set());
+						Mainclass.getThread2_list().addAll(Mainclass.getThread2_set());
 
 						// Empty Set
-						Mainclass.getThread2_set().removeAll(
-								Mainclass.getThread2_set());
+						Mainclass.getThread2_set().removeAll(Mainclass.getThread2_set());
 					}
 
 					starting_point++;
@@ -252,8 +228,7 @@ public class RunClass extends Thread {
 			 * Third thread :
 			 */
 
-		} else if (currentThread().getName().equals(Mainclass.getT3name())
-				&& Mainclass.getThread3_list().size() != 0) {
+		} else if (currentThread().getName().equals(Mainclass.getT3name()) && Mainclass.getThread3_list().size() != 0) {
 
 			int starting_point = 0;
 
@@ -268,27 +243,21 @@ public class RunClass extends Thread {
 
 					// Check if robot tags allows to follow links
 
-
 					if (RobotTags.thread3_mFollow.get(starting_point)) {
 
-						LinkRetrieve.start(Mainclass.getThread3_list().get(
-								starting_point));
+						LinkRetrieve.start(Mainclass.getThread3_list().get(starting_point));
 
 						// Add All Elements In The List To The Set
-						Mainclass.getThread3_set().addAll(
-								Mainclass.getThread3_list());
+						Mainclass.getThread3_set().addAll(Mainclass.getThread3_list());
 
 						// Empty List
-						Mainclass.getThread3_list().removeAll(
-								Mainclass.getThread3_list());
+						Mainclass.getThread3_list().removeAll(Mainclass.getThread3_list());
 
 						// Add Back To The List Only Unique Elements
-						Mainclass.getThread3_list().addAll(
-								Mainclass.getThread3_set());
+						Mainclass.getThread3_list().addAll(Mainclass.getThread3_set());
 
 						// Empty Set
-						Mainclass.getThread3_set().removeAll(
-								Mainclass.getThread3_set());
+						Mainclass.getThread3_set().removeAll(Mainclass.getThread3_set());
 					}
 
 					starting_point++;
@@ -299,12 +268,9 @@ public class RunClass extends Thread {
 					ending_point = Mainclass.getThread3_list().size();
 
 				} else {
-
 					return;
 				}
-
 			}
 		}
-
 	}
 }
