@@ -456,9 +456,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 							System.err.println("Oups Something Interrupted The Thread ...");
 						}
-
 					}
-
 				}
 			}
 		}
