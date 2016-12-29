@@ -13,7 +13,7 @@ public class HtmlFiles {
 
 	public static ArrayList<String> lines = new ArrayList<String>();
 	private static Path filepath;
-	
+
 	public static void checkPath(String path) {
 
 		if (Files.exists(Paths.get(path))) {
@@ -29,8 +29,8 @@ public class HtmlFiles {
 			checkPath(path);
 		}
 	}
-	
-	
+
+
 
 	public static void createFile(String link, String path, int index) throws IOException {
 
@@ -67,6 +67,24 @@ public class HtmlFiles {
 
 			lines.removeAll(lines);
 	}
+
+	public static boolean deleteDirectory(File directory) {
+
+		if (directory.exists()) {
+			File[] files = directory.listFiles();
+			if (null != files) {
+				for (int i = 0; i < files.length; i++) {
+					if (files[i].isDirectory()) {
+						deleteDirectory(files[i]);
+					} else {
+						files[i].delete();
+					}
+				}
+			}
+		}
+		return (directory.delete());
+	}
+
 }
 
 
