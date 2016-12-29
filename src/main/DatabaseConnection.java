@@ -23,6 +23,33 @@ public class DatabaseConnection {
 			System.err.println(e);
 		 }
 	}
+	public static void closeDatabaseConnection() {
+		try {
+			openDatabaseConnection();
+			stmt.close();
+			dbcon.close();
+		} catch (SQLException sqle) {
+			System.err.println(sqle);
+		} catch (Exception e) {
+			System.err.println(e);
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+			} catch (SQLException sqle2) {
+				System.err.println(sqle2);
+			}
+			try {
+				if (dbcon != null) {
+					dbcon.close();
+				}
+			} catch (SQLException sqle) {
+				System.err.println(sqle);
+			}
+		}
+     }
+
 	public static void InsertData(ArrayList<String> array, String path) {
 		try {
 			String pathHtml;
