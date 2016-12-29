@@ -1,5 +1,8 @@
+package com.complet;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -11,7 +14,7 @@ import java.util.ArrayList;
 
 public class HtmlFiles {
 
-	public static ArrayList<String> lines = new ArrayList<String>();
+	private static ArrayList<String> lines = new ArrayList<String>();
 	private static Path filepath;
 
 	public static void checkPath(String path) {
@@ -35,14 +38,18 @@ public class HtmlFiles {
 	public static void createFile(String link, String path, int index) throws IOException {
 
 		URL url = new URL(link);
+
 		URLConnection connection = url.openConnection();
+
 		BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
 		String inputLine;
 
 		while ((inputLine = in.readLine()) != null) {
 
 			lines.add(inputLine);
 		}
+
 		in.close();
 
 		Path filepath = Paths.get(path);
