@@ -33,8 +33,6 @@ public class HtmlFiles {
 		}
 	}
 
-
-
 	public static void createFile(String link, String path, int index) throws IOException {
 
 		URL url = new URL(link);
@@ -52,27 +50,12 @@ public class HtmlFiles {
 
 		in.close();
 
-		Path filepath = Paths.get(path);
+        path = ((path.concat("\\")).concat(Integer.toString(index)).concat(".html"));
+		filepath = Paths.get(path);
+		Files.write(filepath, lines, Charset.forName("UTF-8"));
 
-			if (Files.exists(filepath)) {
-				path = ((path.concat("\\")).concat(Integer.toString(index)).concat(".html"));
-				filepath = Paths.get(path);
-				Files.write(filepath, lines, Charset.forName("UTF-8"));
-			} else {
-
-				do {
-					System.out.printf("%s", "Enter valid path : ");
-					path = Mainclass.inputpath.nextLine();
-					filepath = Paths.get(path);
-				} while (!Files.exists(filepath));
-
-				Mainclass.path = path;
-				path = ((path.concat("\\")).concat(Integer.toString(index)).concat(".html"));
-				filepath = Paths.get(path);
-				Files.write(filepath, lines, Charset.forName("UTF-8"));
-			}
-
-			lines.removeAll(lines);
+		// reset list
+		lines.removeAll(lines);
 	}
 
 	public static boolean deleteDirectory(File directory) {
