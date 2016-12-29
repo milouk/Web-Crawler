@@ -66,11 +66,9 @@ public class Mainclass extends Thread {
 
 		// Acquire Users Email
 		if (answer == 'y' || answer == 'Y') {
-
 			setDate(date = new Date());
 			System.out.printf("%s", "Enter a Valid Email : ");
 			email = mail.nextLine();
-
 		}
 
 		System.out.printf("%s", "Enter How Many Layers You Would Like The Crawler To Complete : ");
@@ -85,7 +83,6 @@ public class Mainclass extends Thread {
 				System.out.printf("%s", "Enter a Valid Path To Create All Html Files : ");
 				path = inputpath.nextLine();
 				HtmlFiles.checkPath(path);
-
 			}
 
 			System.out.println("\n****************************************************");
@@ -108,7 +105,6 @@ public class Mainclass extends Thread {
 			System.out.println("* Finished *");
 			System.out.println("************\n\n");
 		}
-
 	}
 
 	@Override
@@ -119,24 +115,19 @@ public class Mainclass extends Thread {
 			System.out.println("Running for " + run_times + " time!");
 
 			try {
-
 				crawl();
-
 			} catch (Exception e) {
+				System.out.println(e);
+
 			}
-
 			run_times++;
-
 			try {
 				// to be changed to 86400 * 1000
-				Thread.sleep(4000);
-
+				Thread.sleep(86400 * 1000);
 			} catch (InterruptedException e) {
-
+				System.out.println(e);
 			}
-
 		}
-
 	}
 
 	public static void crawl() {
@@ -182,7 +173,6 @@ public class Mainclass extends Thread {
 			File dir = new File(path2);
 			HtmlFiles.deleteDirectory(dir);
 			dir.mkdir();
-
 		}
 
 		for (int i = 0; i < finalist.size(); i++) {
@@ -199,24 +189,21 @@ public class Mainclass extends Thread {
 							.concat(String.valueOf(i + 1).concat(" - ").concat(String.valueOf(i + 100)));
 					File theDir = new File(path);
 					theDir.mkdir();
-
 				}
 
 				HtmlFiles.createFile(finalist.get(i), path, i + 1);
-				// DatabaseConnection.insertData(finalist.get(i), path);
-				// position++;
+				DatabaseConnection.insertData(finalist.get(i), path);
+				position++;
 
 				try {
-
-					Thread.sleep(800);
-
+					// Avoid Spamming The Server
+					Thread.sleep(1500);
 				} catch (InterruptedException e) {
+					System.out.println(e);
 				}
 
 			} catch (IOException e) {
-
 				System.err.println("IO Exception Handled");
-
 			}
 		}
 
@@ -226,7 +213,6 @@ public class Mainclass extends Thread {
 		System.out.println("\n************");
 		System.out.println("* Finished *");
 		System.out.println("************\n\n");
-
 	}
 
 	public static int getRun_times() {
@@ -332,5 +318,4 @@ public class Mainclass extends Thread {
 	public static void setDate(Date date) {
 		Mainclass.date = date;
 	}
-
 }
