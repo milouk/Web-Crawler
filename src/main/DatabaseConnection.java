@@ -53,41 +53,21 @@ public class DatabaseConnection {
 		}
 	}
 
-	public static void InsertData(ArrayList<String> array, String path) {
+	public static void InsertData(String links, String path) {
 		try {
 			String pathHtml;
-			int position;
+
 			openDatabaseConnection();
-			for (int i = 0; i < array.size(); i++) {
-				position = i;
-				pathHtml = path + "/" + Integer.toString(i) + ".html";
-				stmt.executeUpdate("INSERT INTO DatabaseOfURLs VALUES('" + position + "','" + array.get(i) + "','"
-						+ pathHtml + "')");
-			}
-			stmt.close();
-			dbcon.close();
+			pathHtml = path + "/" + Integer.toString(Mainclass.getPosition()) + ".html";
+			stmt.executeUpdate("INSERT INTO DatabaseOfURLs VALUES('" + Mainclass.getPosition() + "','" + links + "','"
+					+ pathHtml + "')");
+			closeDatabaseConnection();
 
 		} catch (SQLException sqle) {
 			System.err.println(sqle);
-		} catch (Exception e) {
-			System.err.println(e);
-		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-				}
-			} catch (SQLException sqle2) {
-				System.err.println(sqle2);
-			}
-			try {
-				if (dbcon != null) {
-					dbcon.close();
-				}
-			} catch (SQLException sqle) {
-				System.err.println(sqle);
-			}
 		}
 	}
+
 	public static void deleteData(String dbName) {
 		try {
 			openDatabaseConnection();
