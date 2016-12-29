@@ -12,6 +12,7 @@ public class DatabaseConnection {
 
 	public static void openDatabaseConnection() {
 		try {
+			GetCredentials.dbCredentials("path DataBase-Credentials.txt");
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			dbcon = DriverManager.getConnection(
 					"jdbc:sqlserver://".concat(GetCredentials.getSqlServerPath()).concat(";databaseName=")
@@ -87,4 +88,13 @@ public class DatabaseConnection {
 			}
 		}
 	}
+	public static void deleteData(String dbName) {
+		try {
+			openDatabaseConnection();
+			stmt.executeUpdate("DELETE FROM " + dbName + ";"); //Deletes data from the dbName table
+			closeDatabaseConnection();
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+    }
 }
