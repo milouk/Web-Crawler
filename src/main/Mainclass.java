@@ -96,8 +96,7 @@ public class Mainclass extends Thread {
 			if (answer == 'Y' || answer == 'y') {
 
 				setDate(date = new Date());
-				GetCredentials.emailCredentials(
-						"C:\\Users\\Michalis\\Business\\DMST\\3rd Semester\\Programming II\\workplace\\Web Crawler\\src\\com\\complet\\EmailCredentials.txt");
+				GetCredentials.emailCredentials("Path to EmailCredentials.txt");
 				EmailSending.email(email);
 			}
 
@@ -122,7 +121,6 @@ public class Mainclass extends Thread {
 			}
 			run_times++;
 			try {
-				// to be changed to 86400 * 1000
 				Thread.sleep(86400 * 1000);
 			} catch (InterruptedException e) {
 				System.out.println(e);
@@ -159,8 +157,7 @@ public class Mainclass extends Thread {
 		RobotTags.mIndex.removeAll(RobotTags.mIndex);
 
 		if (answer == 'Y' || answer == 'y') {
-			GetCredentials.emailCredentials(
-					"C:\\Users\\Michalis\\Business\\DMST\\3rd Semester\\Programming II\\workplace\\Web Crawler\\src\\com\\complet\\EmailCredentials.txt");
+			GetCredentials.emailCredentials("Path To EmailCredentials.txt");
 			EmailSending.email(email);
 		}
 
