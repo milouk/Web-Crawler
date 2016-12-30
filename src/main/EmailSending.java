@@ -16,6 +16,7 @@ public class EmailSending {
 		// Destination Email
 		String to = email;
 
+		// Credentials for the Google mail Service Account
 		GetCredentials.emailCredentials("d:\\Users\\Pan\\Desktop\\JAVA_KOMPLE\\EmailCredentials.txt");
 
 		String from = GetCredentials.getEmail();
@@ -25,6 +26,7 @@ public class EmailSending {
 		// Get system properties
 		Properties properties = System.getProperties();
 
+		// Necessary port, Google mail Service protocol
 		properties.put("mail.smtp.port", "587");
 		properties.put("mail.smtp.auth", "true");
 
@@ -37,7 +39,7 @@ public class EmailSending {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication(GetCredentials
 								.getEmail(), GetCredentials.getEmailPassword());
-					}// Specify the User name and the PassWord
+					}// Specify the User name and the Password
 				});
 
 		try {
@@ -53,24 +55,26 @@ public class EmailSending {
 					to));
 
 			// Set Subject: header field
-			message.setSubject("Επιτυχής Αποστολή");//
+			message.setSubject("Sent message successfully...");//
 
-			message.setText("Η Phoneutria κατάφερε να εκτελέσει το έργο της με επιτυχία" + "\nΕιδικότερα,"
-					+ "\n\n•Έγινε αναζήτηση σε " + Mainclass.getLayers() + " επίπεδο(α)"
-					+ "\n\n•Χρησιμοποιήθηκαν τα εξής URL: \n•" + Mainclass.getLink1() + ", \n•" + Mainclass.getLink2()
-					+ ", \n•" + Mainclass.getLink3() + "\n\n•Δημιουργήθηκαν: " + Mainclass.getFinalist().size()
-					+ " αρχεία από τα αντίστοιχα links τα οποία έγιναν crawl" + "\n•Αυτή ήταν η "
-					+ Mainclass.getRun_times() + "η φορά που έτρεξε \n" + "\nΏρα Έναρξης: "
-					+ dateFormat.format(Mainclass.getDate()) + "\nΏρα Λήξης: " + dateFormat.format(date)
-					+ "\n\n\n•Η Βάση Δεδομένων θα ανανεωθεί σε 24 ώρες!");
+			// Content of the E-mail
+			message.setText("Phoneutria completed the task successfully." + "\n\nMore Details: "
+					+ "\n\n•Searched " + Mainclass.getLayers() + " Layer(s)."
+					+ "\n\n•Used URLs: \n•" + Mainclass.getLink1() + ", \n•" + Mainclass.getLink2()
+					+ ", \n•" + Mainclass.getLink3() + "\n\n•Created: " + Mainclass.getFinalist().size()
+					+ " documents." + "\n•This was the #"
+					+ Mainclass.getRun_times() + " time.\n" + "\nTime Started: "
+					+ dateFormat.format(Mainclass.getDate()) + "\nTime finished: " + dateFormat.format(date)
+					+ "\n\n\n•The Database will be updated in 24 hours!");
 
 			// Send message
 			Transport.send(message);
 
 			// Testing success
-			System.out.println("Sent message successfully....");
+			System.out.println("Sent message successfully...");
 
 		} catch (Exception mex) {
+			// Exception
 			mex.printStackTrace();
 		}
 	}
