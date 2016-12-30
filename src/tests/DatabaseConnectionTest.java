@@ -1,3 +1,5 @@
+package com.complet;
+
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
@@ -7,7 +9,10 @@ import java.sql.Statement;
 
 import org.junit.Test;
 
-public class DatabaseTest {
+import com.complet.Database;
+
+public class DatabaseConnectionTest {
+	
 
 	Connection connection;
 	
