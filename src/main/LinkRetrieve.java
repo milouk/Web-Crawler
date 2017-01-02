@@ -14,10 +14,47 @@ import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.parser.ParserDelegator;
 
+/**
+ * <h1>Link Retrieve - LinkRetrieve.java</h1> The LinkRetrieve Class is a class
+ * that establishes an HTTP connection with a link and then it Extracts all
+ * links within an "a" html tag having an HREF attribute.
+ * <p>
+ * <b>Note: </b>* It also EXCLUDES : <br>
+ * css <br>
+ * jpg <br>
+ * js <br>
+ * gif <br>
+ * png <br>
+ * mp3 <br>
+ * mp4 <br>
+ * zip <br>
+ * gz <br>
+ * jpeg <br>
+ * pdf <br>
+ * Download links ( "://dl." )
+ * <p>
+ *
+ * @author Complet
+ * @version 5.0
+ * @since 2017-01-02
+ */
+
 public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 	// Extensions to EXCLUDE
 	private final static Pattern excludes = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz|jpeg|pdf))$");
+
+	/**
+	 * <p>
+	 * start is the first method of this class. Gets an String as parameter. it
+	 * established an HTTP connection with the link.
+	 *
+	 * @param link
+	 *            which is the link to be checked
+	 * @exception IOException
+	 *                which occurs when a link is malformed.
+	 *                <p>
+	 */
 
 	public static void start(String link) {
 
@@ -35,7 +72,36 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 			System.err.println("This URL was malformed --> " + link + " !");
 		}
+
 	}
+
+	/**
+	 * <p>
+	 * handleStartTag is called by the start method. When an "a" tag is met , it
+	 * checks if the attribute is HREF. If it is it extracts the link. Depending
+	 * on the format of the link ( if it contains a protocol or not, if it is a
+	 * path of the base url etc.) and from which thread's base url was this link
+	 * extracted. It is then cross-checked if the link is valid or not by
+	 * getting the http response from the server it is hosted and if it contains
+	 * a meta robot tag. Finally it is added in the thread's list.
+	 * <p>
+	 *
+	 * @param t
+	 *            an HTML.Tag.
+	 * @param a
+	 *            MutableAttributeSet
+	 * @param int
+	 *            position
+	 * @exception NoSuchElementException
+	 *                which occurs when an html link does NOT contain at least a
+	 *                link with an HREF attribute, hence the enumeration remains
+	 *                empty.
+	 * @exception IOException
+	 *                Input/Output Exception.
+	 * @exception InterruptedException
+	 *                which occurs when any one of the threads is interrupted.
+	 *                <p>
+	 */
 
 	@Override
 	public void handleStartTag(HTML.Tag t, MutableAttributeSet a, int pos) {
@@ -103,9 +169,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											if (RunClass.robotIndex_thread1 == true) {
 												RobotTags.thread1_mIndex.add(true);
 											} else {
-												RobotTags.counter++;
 												RobotTags.thread1_mIndex.add(false);
 											}
+
 										}
 
 									}
@@ -142,7 +208,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											if (RunClass.robotIndex_thread2 == true) {
 												RobotTags.thread2_mIndex.add(true);
 											} else {
-												RobotTags.counter++;
 												RobotTags.thread2_mIndex.add(false);
 											}
 										}
@@ -180,9 +245,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											if (RunClass.robotIndex_thread3 == true) {
 												RobotTags.thread3_mIndex.add(true);
 											} else {
-												RobotTags.counter++;
 												RobotTags.thread3_mIndex.add(false);
 											}
+
 										}
 									}
 								}
@@ -231,9 +296,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											if (RunClass.robotIndex_thread1 == true) {
 												RobotTags.thread1_mIndex.add(true);
 											} else {
-												RobotTags.counter++;
 												RobotTags.thread1_mIndex.add(false);
 											}
+
 										}
 									}
 								}
@@ -269,9 +334,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											if (RunClass.robotIndex_thread2 == true) {
 												RobotTags.thread2_mIndex.add(true);
 											} else {
-												RobotTags.counter++;
 												RobotTags.thread2_mIndex.add(false);
 											}
+
 										}
 									}
 								}
@@ -307,9 +372,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											if (RunClass.robotIndex_thread3 == true) {
 												RobotTags.thread3_mIndex.add(true);
 											} else {
-												RobotTags.counter++;
 												RobotTags.thread3_mIndex.add(false);
 											}
+
 										}
 									}
 								}
@@ -362,9 +427,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											if (RunClass.robotIndex_thread1 == true) {
 												RobotTags.thread1_mIndex.add(true);
 											} else {
-												RobotTags.counter++;
 												RobotTags.thread1_mIndex.add(false);
 											}
+
 										}
 									}
 								}
@@ -405,9 +470,9 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											if (RunClass.robotIndex_thread2 == true) {
 												RobotTags.thread2_mIndex.add(true);
 											} else {
-												RobotTags.counter++;
 												RobotTags.thread2_mIndex.add(false);
 											}
+
 										}
 									}
 								}
@@ -422,35 +487,25 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 								// Check Link Does NOT already Exist in list
 								if (!Mainclass.getThread3_list().contains(link)) {
 
-									// check if link broken... if not returns
-									// "OK" and
-									// make sure link is not an image
-									if (ServerResponse.response(new URL(link)).equals("OK")
-											&& MediaCheck.media(new URL(link))) {
+									// Checks link's robot's content
+									// I only care if it's indexalbe or
+									// followable
+									// If link is suitable for me i take it !
+									// (The noindexables which may stay will be
+									// removed after i make use of them)
+									RobotTags.checkAccess(link);
+									if (RunClass.robotIndex_thread3 == true || RunClass.robotFollow_thread3 == true) {
 
-										// Checks link's robot's content
-										// I only care if it's indexalbe or
-										// followable
-										// If link is suitable for me i take it
-										// !
-										// (The noindexables which may stay will
-										// be removed after i make use of them)
-										RobotTags.checkAccess(link);
-										if (RunClass.robotIndex_thread3 == true
-												|| RunClass.robotFollow_thread3 == true) {
-
-											Mainclass.getThread3_list().add(link);
-											if (RunClass.robotFollow_thread3 == true) {
-												RobotTags.thread3_mFollow.add(true);
-											} else {
-												RobotTags.thread3_mFollow.add(false);
-											}
-											if (RunClass.robotIndex_thread3 == true) {
-												RobotTags.thread3_mIndex.add(true);
-											} else {
-												RobotTags.counter++;
-												RobotTags.thread3_mIndex.add(false);
-											}
+										Mainclass.getThread3_list().add(link);
+										if (RunClass.robotFollow_thread3 == true) {
+											RobotTags.thread3_mFollow.add(true);
+										} else {
+											RobotTags.thread3_mFollow.add(false);
+										}
+										if (RunClass.robotIndex_thread3 == true) {
+											RobotTags.thread3_mIndex.add(true);
+										} else {
+											RobotTags.thread3_mIndex.add(false);
 										}
 									}
 								}
@@ -462,16 +517,19 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 							System.err.println("Just handled an exception..dont worry!");
 						}
 
-						// Avoid Getting Thrown Out From The Server
+						// Sleep to Avoid Getting Thrown Out From The Server
+
 						try {
 
 							Thread.sleep(1500);
 
-						} catch (Exception e) {
+						} catch (InterruptedException e) {
 
 							System.err.println("Oups Something Interrupted The Thread ...");
 						}
+
 					}
+
 				}
 			}
 		}
