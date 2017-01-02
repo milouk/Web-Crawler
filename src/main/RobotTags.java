@@ -5,19 +5,37 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.parser.ParserDelegator;
 
+/**
+ * <h1>Robot meta tags - RobotTags.java</h1> The RobotTags Class establishes an
+ * HTTP connection with a link and checks its meta tag content.
+ *
+ * Its main purpose is to check if the link has a meta tag with an attribute
+ * NAME that is "robots" and give instructions to the program on how to manage
+ * this link depending on its attribute CONTENT
+ * <p>
+ * <b>Note: </b> RobotTags also has an extra feature which is used in the end of
+ * the program: <br>
+ * remover() method <br>
+ * <p>
+ *
+ * @author Complet
+ * @version 5.0
+ * @since 2016-12-29
+ *
+ */
+
 public class RobotTags extends HTMLEditorKit.ParserCallback {
 
-	// These lists are telling to the crawler if a link is indexable or
+	// These lists tell the crawler if a link is indexable or
 	// followable
 	// They get their values at LinkRetrieve
-	// By true or false they tell if the linkRetrieve should run
-	// Also they are used to the remover, they help telling which links need to
+	// By true or false they tell if LinkRetrieve should run
+	// Also they are used by remover, they help telling which links need to
 	// be removed by true or false
 	public static ArrayList<Boolean> thread1_mIndex = new ArrayList<Boolean>();
 	public static ArrayList<Boolean> thread1_mFollow = new ArrayList<Boolean>();
@@ -30,10 +48,14 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 
 	public static ArrayList<Boolean> mIndex = new ArrayList<Boolean>();
 
-	public static int counter = 0;// Counts how many noindex links need to be
-									// removed
+	/**
+	 * <p>
+	 * remover is the first method of this class. It removes all the links from
+	 * the finalist that are noindexable and got retrieved because they were
+	 * followable.
+	 * <p>
+	 */
 
-	// Removes the noindexables from the list when called
 	public static void remover() {
 
 		for (int i = 0; i < Mainclass.getFinalist().size(); i++) {
@@ -44,7 +66,19 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 		}
 	}
 
-	// Checks if i should keep the link depending of the robot's content
+	/**
+	 * <p>
+	 * checkAccess is the second method of this class. It established an HTTP
+	 * connection with the link and turns all the variables into true to be
+	 * ready for the robot tags check session.
+	 *
+	 * @param link
+	 *            which is the link to be checked
+	 * @exception IOException
+	 *                which occurs when a link is malformed.
+	 *                <p>
+	 */
+
 	public static void checkAccess(String link) {
 
 		if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
@@ -75,11 +109,45 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 			new ParserDelegator().parse(reader, new RobotTags(), true);
 
 		} catch (Exception e) {
-			System.out.println(e);
 		}
+
 	}
 
-	// Checks the robot's contents (indexable or followable)
+	/**
+	 * <p>
+	 * handleSimpleTag is called by the checkAccess method. When a "t" tag is
+	 * met , it checks if the attribute NAME is robots. If it is then it checks
+	 * the attribute CONTENT. It only checks if the attribute CONTENT is
+	 * "follow", "nofollow", "index" or "noindex". If the CONTENT has "nofollow"
+	 * it turns the right variable into false to tell to LinkRetrieve to not
+	 * retrieve the links that are in the link it currently is, if not OR has
+	 * "follow", the variable will stay true and it means that LinkRetrieve can
+	 * retrieve them.
+	 *
+	 * If the CONTENT has "noindex" it turns the right variable into false to
+	 * tell to LinkRetrieve to not add the link it currently is in the list, if
+	 * not OR has "index", the variable will stay true and it means that
+	 * LinkRetrieve can add it.
+	 *
+	 * <p>
+	 *
+	 * @param t
+	 *            an HTML.Tag.
+	 * @param a
+	 *            MutableAttributeSet
+	 * @param int
+	 *            position
+	 * @exception NoSuchElementException
+	 *                which occurs when an html link does NOT contain at least a
+	 *                link with an HREF attribute, hence the enumeration remains
+	 *                empty.
+	 * @exception IOException
+	 *                Input/Output Exception.
+	 * @exception InterruptedException
+	 *                which occurs when any one of the threads is interrupted.
+	 *                <p>
+	 */
+
 	@Override
 	public void handleSimpleTag(HTML.Tag t, MutableAttributeSet a, int pos) {
 
@@ -89,9 +157,6 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 			String content = (String) a.getAttribute(HTML.Attribute.CONTENT);
 
 			if (name != null && (name.contains("robots") || name.contains("ROBOTS"))) {
-
-				System.out.println("META name: " + name);
-				System.out.println("META content: " + content + "\n");
 
 				if (content != null && (content.contains("nofollow") || content.contains("NOFOLLOW"))) {
 
@@ -107,6 +172,7 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 
 						RunClass.robotFollow_thread3 = false;
 					}
+
 				}
 
 				if (content != null && (content.contains("noindex") || content.contains("NOINDEX"))) {
@@ -124,7 +190,9 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 						RunClass.robotIndex_thread3 = false;
 					}
 				}
+
 			}
+
 		}
 	}
 }
