@@ -6,7 +6,7 @@ package com.complet;
  * proceeding to next run.
  *
  * @author Complet
- * @version 5.0
+ * @version 6.0
  * @since 2017-01-02
  */
 
@@ -48,18 +48,15 @@ public class RunClass extends Thread {
 
 		// Ensure all threads are finished
 		try {
-
 			m1.join();
 			m2.join();
 			m3.join();
-
 		} catch (InterruptedException e) {
 			System.err.println("Thread Was Unexcpectedly Interrupted! ");
 		}
 
 		// Empties Finalist for next run.
 		Mainclass.getFinalist().removeAll(Mainclass.getFinalist());
-
 	}
 
 	/**
@@ -81,13 +78,9 @@ public class RunClass extends Thread {
 
 			// Check if robot tags exists and allows to follow links
 			try {
-
 				RobotTags.checkAccess(Mainclass.getLink1());
-
 			} catch (Exception e) {
-
 				System.err.println(e);
-
 			}
 
 			if (robotFollow_thread1) {
@@ -115,20 +108,15 @@ public class RunClass extends Thread {
 
 			// Check if robot tags exists and allows to follow links
 			try {
-
 				RobotTags.checkAccess(Mainclass.getLink3());
-
 			} catch (Exception e) {
-
 				System.err.println(e);
-
 			}
 
 			if (robotFollow_thread3) {
 				// initial run thread 3 (link 3)
 				LinkRetrieve.start(Mainclass.getLink3());
 			}
-
 		}
 
 		/*
@@ -142,32 +130,22 @@ public class RunClass extends Thread {
 			// current list size
 			int ending_point = Mainclass.getThread1_list().size();
 
-			// level loop
+			// layer loop
 			for (int k = 1; k < Mainclass.getLayers(); k++) {
-
 				// call start method for every link in list
 				while (starting_point < ending_point) {
-
 					// Check if robot tags exists and allows to follow links
-
 					if (RobotTags.thread1_mFollow.get(starting_point)) {
-
 						LinkRetrieve.start(Mainclass.getThread1_list().get(starting_point));
-
 					}
-
 					starting_point++;
 				}
-
 				// If a link has NOT added any link to the list
 				if (ending_point < Mainclass.getThread1_list().size()) {
 					ending_point = Mainclass.getThread1_list().size();
-
 				} else {
-
 					return;
 				}
-
 			}
 
 			/*
@@ -181,23 +159,16 @@ public class RunClass extends Thread {
 			// current list size
 			int ending_point = Mainclass.getThread2_list().size();
 
-			// level loop
+			// layer loop
 			for (int k = 1; k < Mainclass.getLayers(); k++) {
-
 				// call start method for every link in list
 				while (starting_point < ending_point) {
-
 					// Check if robot tags exists and allows to follow links
-
 					if (RobotTags.thread2_mFollow.get(starting_point)) {
-
 						LinkRetrieve.start(Mainclass.getThread2_list().get(starting_point));
-
 					}
-
 					starting_point++;
 				}
-
 				// If a link has NOT added any link to the list
 				if (ending_point < Mainclass.getThread2_list().size()) {
 					ending_point = Mainclass.getThread2_list().size();
@@ -217,33 +188,23 @@ public class RunClass extends Thread {
 			// current list size
 			int ending_point = Mainclass.getThread3_list().size();
 
-			// level loop
+			// layer loop
 			for (int k = 1; k < Mainclass.getLayers(); k++) {
-
 				// call start method for every link in list
 				while (starting_point < ending_point) {
-
 					// Check if robot tags exists and allows to follow links
-
 					if (RobotTags.thread3_mFollow.get(starting_point)) {
-
 						LinkRetrieve.start(Mainclass.getThread3_list().get(starting_point));
 					}
-
 					starting_point++;
 				}
-
 				// If a link has NOT added any link to the list
 				if (ending_point < Mainclass.getThread3_list().size()) {
 					ending_point = Mainclass.getThread3_list().size();
-
 				} else {
-
 					return;
 				}
-
 			}
 		}
-
 	}
 }
