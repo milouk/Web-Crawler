@@ -13,7 +13,7 @@ import java.util.Scanner;
  * <b>Note: </b>If crawl run method crashes the whole program does also.
  *
  * @author Complet
- * @version 5.0
+ * @version 6.0
  * @since 2017-01-02
  */
 
@@ -31,9 +31,9 @@ public class Mainclass extends Thread {
 	private static String t1name; // thread 1 name
 	private static String t2name; // thread 2 name
 	private static String t3name; // thread 3 name
-	private static String link1 = "https://gmail.com/";
-	private static String link2 = "https://review.cyanogenmod.org/";
-	private static String link3 = "https://www.cmxlog.com/14.1/";
+	private static String link1 = "Enter Link 1";
+	private static String link2 = "Enter Link 2";
+	private static String link3 = "Enter Link 3";
 
 	// thread result lists
 	private static ArrayList<String> thread1_list = new ArrayList<String>();
@@ -117,7 +117,7 @@ public class Mainclass extends Thread {
 			if (answer == 'Y' || answer == 'y') {
 
 				setDate(date = new Date());
-				GetCredentials.emailCredentials("Path to EmailCredentials.txt");
+				GetCredentials.emailCredentials("Enter Path to EmailCredentials.txt");
 				EmailSending.email(email);
 			}
 
@@ -149,30 +149,23 @@ public class Mainclass extends Thread {
 	public final void run() {
 
 		for (;;) {
-
 			System.out.println("Running for " + run_times + " time!");
-
 			try {
-
 				crawl();
-
 			} catch (Exception e) {
-				System.err.println("An error has occured in Crawl Mrthod! ");
+				System.err.println("An error has occured in Crawl Method! ");
 			}
-
-			// Count Runs
+			// Counts Runs
 			run_times++;
 
 			try {
-				// to be changed to 86400 * 1000
-				Thread.sleep(4000);
+				// 86400 * 1000 = 24H
+				Thread.sleep(86400 * 1000);
 
 			} catch (InterruptedException e) {
-
+				System.err.println("Thread Unexpectedly Interrupted! ");
 			}
-
 		}
-
 	}
 
 	/**
@@ -222,7 +215,7 @@ public class Mainclass extends Thread {
 		RobotTags.mIndex.removeAll(RobotTags.mIndex);
 
 		if (answer == 'Y' || answer == 'y') {
-			GetCredentials.emailCredentials("Path to EmailCredentials.txt");
+			GetCredentials.emailCredentials("Enter Path to EmailCredentials.txt");
 			EmailSending.email(email);
 		}
 
@@ -237,7 +230,6 @@ public class Mainclass extends Thread {
 			HtmlFiles.deleteDirectory(dir);
 			// Re-Create Html files Directory
 			dir.mkdir();
-
 		}
 
 		for (int i = 0; i < finalist.size(); i++) {
@@ -257,26 +249,20 @@ public class Mainclass extends Thread {
 							.concat(String.valueOf(i + 1).concat(" - ").concat(String.valueOf(i + 100)));
 					File theDir = new File(path);
 					theDir.mkdir();
-
 				}
 				// Write HTML Files
 				HtmlFiles.createFile(finalist.get(i), path, i + 1);
 				// Insert Urls , Paths to SQL DB
-				// DatabaseConnection.insertData(finalist.get(i), path);
-				// position++;
+				DatabaseConnection.InsertData(finalist.get(i), path);
+				position++;
 
 				try {
-
 					Thread.sleep(800);
-
 				} catch (InterruptedException e) {
 					System.err.println("Thread was interrupted! ");
 				}
-
 			} catch (IOException e) {
-
 				System.err.println("IO Exception Handled");
-
 			}
 		}
 
@@ -286,7 +272,6 @@ public class Mainclass extends Thread {
 		System.out.println("\n************");
 		System.out.println("* Finished *");
 		System.out.println("************\n\n");
-
 	}
 
 	// Getters and Setters
@@ -455,5 +440,4 @@ public class Mainclass extends Thread {
 	public static void setDate(Date date) {
 		Mainclass.date = date;
 	}
-
 }
