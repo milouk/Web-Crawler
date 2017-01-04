@@ -24,7 +24,7 @@ import javax.swing.text.html.parser.ParserDelegator;
  * <p>
  *
  * @author Complet
- * @version 5.0
+ * @version 6.0
  * @since 2016-12-29
  *
  */
@@ -59,7 +59,6 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 	public static void remover() {
 
 		for (int i = 0; i < Mainclass.getFinalist().size(); i++) {
-
 			if (mIndex.get(i) == false) {
 				Mainclass.getFinalist().remove(i);
 			}
@@ -82,33 +81,24 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 	public static void checkAccess(String link) {
 
 		if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
-
 			RunClass.robotFollow_thread1 = true;
 			RunClass.robotIndex_thread1 = true;
-
 		} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
-
 			RunClass.robotFollow_thread2 = true;
 			RunClass.robotIndex_thread2 = true;
-
 		} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
-
 			RunClass.robotFollow_thread3 = true;
 			RunClass.robotIndex_thread3 = true;
-
 		}
 
 		try {
 
 			URL url = new URL(link);
-
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
 			new ParserDelegator().parse(reader, new RobotTags(), true);
-
 		} catch (Exception e) {
+			System.err.println(e);
 		}
 
 	}
@@ -157,42 +147,25 @@ public class RobotTags extends HTMLEditorKit.ParserCallback {
 			String content = (String) a.getAttribute(HTML.Attribute.CONTENT);
 
 			if (name != null && (name.contains("robots") || name.contains("ROBOTS"))) {
-
 				if (content != null && (content.contains("nofollow") || content.contains("NOFOLLOW"))) {
-
 					if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
-
 						RunClass.robotFollow_thread1 = false;
-
 					} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
-
 						RunClass.robotFollow_thread2 = false;
-
 					} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
-
 						RunClass.robotFollow_thread3 = false;
 					}
-
 				}
-
 				if (content != null && (content.contains("noindex") || content.contains("NOINDEX"))) {
-
 					if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
-
 						RunClass.robotIndex_thread1 = false;
-
 					} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
-
 						RunClass.robotIndex_thread2 = false;
-
 					} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
-
 						RunClass.robotIndex_thread3 = false;
 					}
 				}
-
 			}
-
 		}
 	}
 }
