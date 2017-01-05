@@ -61,27 +61,23 @@ Download :
 <h4>Before Running/Building with Maven : <h4>
 
 Enter Manually :
- 
-* Path for Database-Credentials.txt File in <code> DatabaseConnection.java </code>.
-* Path for EmailCredentials.txt File in <code> Mainclass.java </code>.
-* Base Links to be Crawled in <code> Mainclass.java </code>.
+ * Path for Database-Credentials.txt File in <code> DatabaseConnection.java </code>.
+ * Path for EmailCredentials.txt File in <code> Mainclass.java </code>.
+ * Base Links to be Crawled in <code> Mainclass.java </code>.
 
 <h2>How to Build it</h2>
 
 In order to build and use Phoneutria, download the source code by cloning it via your Git client:
 <p>
 <code> https://github.com/milouk/Web_Crawler.git </code>
-</p>
 
 Phoneutria uses [Maven](https://maven.apache.org/download.cgi) to manage the project, therefore your need to compile the Java source file and generate the Phoneutria-jar-with-dependencies.jar archive by using the following goal : 
 <p>
 <code> assembly:single </code>
-</p>
 
 To execute the Phoneutria-jar-with-dependencies.jar File, change Directory to Phoneutria-jar-with-dependencies.jar Directory and type the following Command Prompt(CMD) command :
 <p>
 <code> Java -jar Phoneutria-jar-with-dependencies.jar </code>
-</p>
 
 <h2>Extra Info</h2> 
 
