@@ -12,7 +12,7 @@ import java.sql.Statement;
  * it.
  *
  * @author Complet
- * @version 5.0
+ * @version 6.0
  * @since 2017-01-02
  */
 
@@ -30,6 +30,7 @@ public class DatabaseConnection {
 	 */
 
 	public static void openDatabaseConnection() {
+
 		try {
 			GetCredentials.dbCredentials("path DataBase-Credentials.txt"); // Calls
 																			// the
@@ -64,6 +65,7 @@ public class DatabaseConnection {
 	 */
 
 	public static void closeDatabaseConnection() {
+
 		try {
 			openDatabaseConnection(); // Calls the openDatabaseConnection method
 										// to ensure there is an open connection
@@ -108,6 +110,7 @@ public class DatabaseConnection {
 	 */
 
 	public static void InsertData(String links, String path) {
+
 		try {
 			String pathHtml;
 
@@ -137,6 +140,7 @@ public class DatabaseConnection {
 	 */
 
 	public static void deleteData(String dbName) {
+
 		try {
 			openDatabaseConnection(); // Creates a connection to the database
 			stmt.executeUpdate("DELETE FROM " + dbName + ";"); // Deletes data
