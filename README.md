@@ -64,7 +64,7 @@ Enter Manually :
  
 * Path for Database-Credentials.txt File in <code> DatabaseConnection.java </code>.
 * Path for EmailCredentials.txt File in <code> Mainclass.java </code>.
-* Links to be Crawled in <code> Mainclass.java </code>.
+* Base Links to be Crawled in <code> Mainclass.java </code>.
 
 <h2>How to Build it</h2>
 
