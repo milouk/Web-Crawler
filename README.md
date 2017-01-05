@@ -1,6 +1,6 @@
-<h1>Project "Phoneutria"</h1>
+<h1><b>Project "Phoneutria"</b></h1>
 
-<h2>What is a Web Crawler?</h2>
+<h2><b>What is a Web Crawler?</b></h2>
 
 
 A Web crawler is an Internet bot which systematically browses the World Wide Web, typically for the purpose of Web indexing (web spidering).
@@ -48,7 +48,7 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 * Simultaneous 3 URL scan.
 * Sleep for 1,5 seconds to avoid getting thrown out of the Host-Server.
 
-<h2>How to Configure "Phoneutria"</h2>
+<h2><b>How to Configure "Phoneutria"</b></h2>
 <p>
 Phoneutria is fully written in [Java (v. 8+)](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html) and its project is fully managed by [Maven (v. 3.3.9)](https://maven.apache.org/download.cgi).
 
@@ -65,7 +65,7 @@ Enter Manually :
  * Path for EmailCredentials.txt File in <code> Mainclass.java </code>.
  * Base Links to be Crawled in <code> Mainclass.java </code>.
 
-<h2>How to Build it</h2>
+<h2><b>How to Build it</b></h2>
 
 In order to build and use Phoneutria, download the source code by cloning it via your Git client:
 <p>
@@ -79,11 +79,12 @@ To execute the Phoneutria-jar-with-dependencies.jar File, change Directory to Ph
 <p>
 <code> Java -jar Phoneutria-jar-with-dependencies.jar </code>
 
-<h2>Extra Info</h2> 
+<h2><b>Extra Info</b></h2> 
 
 For more information about how Phoneutria works, refer to our JavaDoc section located at :
+<p>
 <code> https://github.com/milouk/Web_Crawler/tree/master/doc </code>
 
-<h2>License<h2>
+<h2><b>License</b><h2>
 
 Copyright (c) 2016, Athens University of Economics and Business.
