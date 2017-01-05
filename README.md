@@ -71,11 +71,11 @@ Enter Manually :
 In order to build and use Phoneutria, download the source code by cloning it via your Git client:
 <code> https://github.com/milouk/Web_Crawler.git </code>
 
-Phoneutria uses [Maven](https://maven.apache.org/download.cgi) to manage the project, therefore your need to compile the Java source file and generate the Phoneutria.jar archive by using the following goal : 
+Phoneutria uses [Maven](https://maven.apache.org/download.cgi) to manage the project, therefore your need to compile the Java source file and generate the Phoneutria-jar-with-dependencies.jar archive by using the following goal : 
 <code> assembly:single </code>
 
-To execute the Phoneutria.jar File change Directory to Phoneutria.jar Directory and type the following Command Prompt(CMD) command :
-<code> Java -jar Phoneutria.jar </code>
+To execute the Phoneutria-jar-with-dependencies.jar File change Directory to Phoneutria-jar-with-dependencies.jar Directory and type the following Command Prompt(CMD) command :
+<code> Java -jar Phoneutria-jar-with-dependencies.jar </code>
 
 <h2>Extra Info</h2> 
 
