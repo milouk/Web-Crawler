@@ -1,6 +1,10 @@
 package com.complet;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -9,14 +13,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * <h1>Send an Email - EmailSending.java</h1> The EmailSending Class is able to send an email using
- * the simple mail transfer protocol (S.M.T.P.)
+ * <h1>Send an Email - EmailSending.java</h1> The EmailSending Class is able to
+ * send an email using the simple mail transfer protocol (S.M.T.P.)
  * <p>
  * <b>Note: </b>Must get a valid E-mail in order to execute the process,
  * otherwise, it will not work.
  * <p>
+ *
  * @author Complet
- * @version 5.0
+ * @version 6.0
  * @since 2016-12-29
  *
  */
@@ -43,19 +48,22 @@ public class EmailSending {
 	 * <li>Date and TIme the program "ended" (for the given Run_time)
 	 * <p>
 	 *
-	 * @param email The recipient mail.
+	 * @param email
+	 *            The recipient mail.
 	 * @return Nothing.
-	 * @exception Exception It varies from time to time based on the Google Mail Service. Cannot predict exceptions based on their Services.
+	 * @exception Exception
+	 *                It varies from time to time based on the Google Mail
+	 *                Service. Cannot predict exceptions based on their
+	 *                Services.
 	 *
 	 */
 
 	public static void email(String email) {
 
-		// Destination Email
-		String to = email;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
 
-		// Credentials for the Google mail Service Account
-		GetCredentials.emailCredentials("d:\\Users\\Pan\\Desktop\\JAVA_KOMPLE\\EmailCredentials.txt");
+		String to = email;
 
 		String from = GetCredentials.getEmail();
 
@@ -64,7 +72,6 @@ public class EmailSending {
 		// Get system properties
 		Properties properties = System.getProperties();
 
-		// Necessary port, Google mail Service protocol
 		properties.put("mail.smtp.port", "587");
 		properties.put("mail.smtp.auth", "true");
 
@@ -72,13 +79,11 @@ public class EmailSending {
 
 		properties.setProperty("mail.smtp.host", host);
 
-		Session session = Session.getDefaultInstance(properties,
-				new javax.mail.Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(GetCredentials
-								.getEmail(), GetCredentials.getEmailPassword());
-					}// Specify the User name and the Password
-				});
+		Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(GetCredentials.getEmail(), GetCredentials.getEmailPassword());
+			}// Specify the User name and the PassWord
+		});
 
 		try {
 
@@ -89,32 +94,26 @@ public class EmailSending {
 			message.setFrom(new InternetAddress(from));
 
 			// Set To: header field of the header.
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(
-					to));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 			// Set Subject: header field
-			message.setSubject("Sent message successfully...");//
+			message.setSubject("Crawling Completed!");//
 
-			// Content of the E-mail
-			message.setText("Phoneutria completed the task successfully." + "\n\nMore Details: "
-					+ "\n\n•Searched " + Mainclass.getLayers() + " Layer(s)."
-					+ "\n\n•Used URLs: \n•" + Mainclass.getLink1() + ", \n•" + Mainclass.getLink2()
-					+ ", \n•" + Mainclass.getLink3() + "\n\n•Created: " + Mainclass.getFinalist().size()
-					+ " documents." + "\n•This was the #"
-					+ Mainclass.getRun_times() + " time.\n" + "\nTime Started: "
-					+ dateFormat.format(Mainclass.getDate()) + "\nTime finished: " + dateFormat.format(date)
-					+ "\n\n\n•The Database will be updated in 24 hours!");
+			message.setText("Project \"Phoneutria\" completed successfully." + "\n\nMore Details: " + "\n\n•Scanned "
+					+ Mainclass.getLayers() + " Layer(s)." + "\n\n•Base URLs: \n•" + Mainclass.getLink1() + ", \n•"
+					+ Mainclass.getLink2() + ", \n•" + Mainclass.getLink3() + "\n\n•Created: "
+					+ Mainclass.getFinalist().size() + " documents." + "\n•This was the #" + Mainclass.getRun_times()
+					+ " time.\n" + "\nTime Started: " + dateFormat.format(Mainclass.getDate()) + "\nTime Finished: "
+					+ dateFormat.format(date) + "\n\n\n•The Database will be updated in 24 hours!");
 
 			// Send message
 			Transport.send(message);
 
 			// Testing success
-			System.out.println("Sent message successfully...");
+			System.out.println("Sent message successfully....");
 
 		} catch (Exception mex) {
-			// Exception
 			mex.printStackTrace();
 		}
 	}
 }
-
