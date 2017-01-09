@@ -35,11 +35,15 @@ import javax.swing.text.html.parser.ParserDelegator;
  * <p>
  *
  * @author Complet
- * @version 5.0
+ * @version 6.0
  * @since 2017-01-02
  */
 
 public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
+
+	public static String baselink1;
+	public static String baselink2;
+	public static String baselink3;
 
 	// Extensions to EXCLUDE
 	private final static Pattern excludes = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz|jpeg|pdf))$");
@@ -57,6 +61,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 	 */
 
 	public static void start(String link) {
+
+		// Store base urls of each thread for use in the concatenation in third
+		// case where a relative path gets concatenated to the base url.
+		if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
+			baselink1 = link;
+		} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
+			baselink2 = link;
+		} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
+			baselink3 = link;
+		}
 
 		try {
 
@@ -171,14 +185,11 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											} else {
 												RobotTags.thread1_mIndex.add(false);
 											}
-
 										}
-
 									}
 								}
 
 							} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
-
 								// Check Link Does NOT already Exist in list
 								if (!Mainclass.getThread2_list().contains(link)) {
 
@@ -215,7 +226,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 								}
 
 							} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
-
 								// Check Link Does NOT already Exist in list
 								if (!Mainclass.getThread3_list().contains(link)) {
 
@@ -247,14 +257,12 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											} else {
 												RobotTags.thread3_mIndex.add(false);
 											}
-
 										}
 									}
 								}
 							}
 
 						} catch (IOException e) {
-
 							System.err.println("Something Went Wrong...Chill");
 						}
 
@@ -298,7 +306,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											} else {
 												RobotTags.thread1_mIndex.add(false);
 											}
-
 										}
 									}
 								}
@@ -336,13 +343,11 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											} else {
 												RobotTags.thread2_mIndex.add(false);
 											}
-
 										}
 									}
 								}
 
 							} else if (RunClass.currentThread().getName().equals(Mainclass.getT3name())) {
-
 								// Check Link Does NOT already Exist in list
 								if (!Mainclass.getThread3_list().contains(link)) {
 
@@ -374,29 +379,26 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											} else {
 												RobotTags.thread3_mIndex.add(false);
 											}
-
 										}
 									}
 								}
 							}
 
 						} catch (IOException e) {
-
 							System.err.println("Something Went Wrong...Chill");
 						}
 
 						// if it does not start with an '/' then it is NOT a
 						// path of the root link.
 					} else if (link.startsWith("/")) {
-
 						try {
 
 							// If thread 1
 							if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
 
 								// Concatenates path with root link the correct
-								// way
-								link = new URL(new URL(Mainclass.getLink1()), link).toString();
+								// way, Mainclas.Link1 is url currently crawled
+								link = new URL(new URL(baselink1), link).toString();
 
 								// Check Link Does NOT already Exist in list
 								if (!Mainclass.getThread1_list().contains(link)) {
@@ -429,7 +431,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											} else {
 												RobotTags.thread1_mIndex.add(false);
 											}
-
 										}
 									}
 								}
@@ -439,7 +440,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 								// Concatenates path with root link the correct
 								// way
-								link = new URL(new URL(Mainclass.getLink2()), link).toString();
+								link = new URL(new URL(baselink2), link).toString();
 
 								// Check Link Does NOT already Exist in list
 								if (!Mainclass.getThread2_list().contains(link)) {
@@ -472,7 +473,6 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 											} else {
 												RobotTags.thread2_mIndex.add(false);
 											}
-
 										}
 									}
 								}
@@ -482,7 +482,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 								// Concatenates path with root link the correct
 								// way
-								link = new URL(new URL(Mainclass.getLink3()), link).toString();
+								link = new URL(new URL(baselink3), link).toString();
 
 								// Check Link Does NOT already Exist in list
 								if (!Mainclass.getThread3_list().contains(link)) {
@@ -513,23 +513,16 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 							}
 
 						} catch (IOException e) {
-
 							System.err.println("Just handled an exception..dont worry!");
 						}
 
 						// Sleep to Avoid Getting Thrown Out From The Server
-
 						try {
-
 							Thread.sleep(1500);
-
 						} catch (InterruptedException e) {
-
 							System.err.println("Oups Something Interrupted The Thread ...");
 						}
-
 					}
-
 				}
 			}
 		}
