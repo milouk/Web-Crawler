@@ -57,6 +57,10 @@ Phoneutria is fully written in [Java (v. 8+)](http://www.oracle.com/technetwork/
 Download :
 * <code> mail.jar</code>
 * <code> activation.jar </code>
+* <code> sqljdbc4.jar </code>
+
+<p>
+<i>Alterntatively Use the pom.xml file provided.</i>
            
 <h4>Before Running/Building with Maven : <h4>
 
