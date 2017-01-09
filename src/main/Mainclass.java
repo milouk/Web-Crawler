@@ -257,7 +257,7 @@ public class Mainclass extends Thread {
 					// Write HTML Files
 					HtmlFiles.createFile(finalist.get(i), path, i + 1);
 					// Insert Urls , Paths to SQL DB
-					// DatabaseConnection.InsertData(finalist.get(i), path);
+					DatabaseConnection.InsertData(finalist.get(i), path);
 					position++;
 				} else {
 					File dir = new File(path2);
