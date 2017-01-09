@@ -2,6 +2,8 @@ package com.complet;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -31,9 +33,9 @@ public class Mainclass extends Thread {
 	private static String t1name; // thread 1 name
 	private static String t2name; // thread 2 name
 	private static String t3name; // thread 3 name
-	private static String link1 = "Enter Link 1";
-	private static String link2 = "Enter Link 2";
-	private static String link3 = "Enter Link 3";
+	private static String link1 = "http://gmail.com/";
+	private static String link2 = "http://www.bbc.com/";
+	private static String link3 = "https://review.cyanogenmod.org/";
 
 	// thread result lists
 	private static ArrayList<String> thread1_list = new ArrayList<String>();
@@ -160,7 +162,7 @@ public class Mainclass extends Thread {
 
 			try {
 				// 86400 * 1000 = 24H
-				Thread.sleep(86400 * 1000);
+				Thread.sleep(1000);
 
 			} catch (InterruptedException e) {
 				System.err.println("Thread Unexpectedly Interrupted! ");
@@ -250,14 +252,21 @@ public class Mainclass extends Thread {
 					File theDir = new File(path);
 					theDir.mkdir();
 				}
-				// Write HTML Files
-				HtmlFiles.createFile(finalist.get(i), path, i + 1);
-				// Insert Urls , Paths to SQL DB
-				DatabaseConnection.InsertData(finalist.get(i), path);
-				position++;
+//Double check the directory HTML_Files exists.
+				if (Files.exists(Paths.get(path2))) {
+					// Write HTML Files
+					HtmlFiles.createFile(finalist.get(i), path, i + 1);
+					// Insert Urls , Paths to SQL DB
+					// DatabaseConnection.InsertData(finalist.get(i), path);
+					position++;
+				} else {
+					File dir = new File(path2);
+					dir.mkdir();
+					i = -1;
+				}
 
 				try {
-					Thread.sleep(800);
+					Thread.sleep(1);
 				} catch (InterruptedException e) {
 					System.err.println("Thread was interrupted! ");
 				}
