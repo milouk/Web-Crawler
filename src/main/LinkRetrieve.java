@@ -64,6 +64,7 @@ public class LinkRetrieve extends HTMLEditorKit.ParserCallback {
 
 		// Store base urls of each thread for use in the concatenation in third
 		// case where a relative path gets concatenated to the base url.
+
 		if (RunClass.currentThread().getName().equals(Mainclass.getT1name())) {
 			baselink1 = link;
 		} else if (RunClass.currentThread().getName().equals(Mainclass.getT2name())) {
