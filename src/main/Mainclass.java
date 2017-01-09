@@ -33,9 +33,9 @@ public class Mainclass extends Thread {
 	private static String t1name; // thread 1 name
 	private static String t2name; // thread 2 name
 	private static String t3name; // thread 3 name
-	private static String link1 = "http://gmail.com/";
-	private static String link2 = "http://www.bbc.com/";
-	private static String link3 = "https://review.cyanogenmod.org/";
+	private static String link1 = "Enter Link 1";
+	private static String link2 = "Enter Link 2";
+	private static String link3 = "Enter Link 3";
 
 	// thread result lists
 	private static ArrayList<String> thread1_list = new ArrayList<String>();
@@ -162,7 +162,7 @@ public class Mainclass extends Thread {
 
 			try {
 				// 86400 * 1000 = 24H
-				Thread.sleep(1000);
+				Thread.sleep(86400 * 1000);
 
 			} catch (InterruptedException e) {
 				System.err.println("Thread Unexpectedly Interrupted! ");
@@ -226,7 +226,7 @@ public class Mainclass extends Thread {
 		// Delete Old Files and Database in order to replace them with new ones.
 		if (Mainclass.getRun_times() > 1) {
 
-			// DatabaseConnection.deleteData("DatabaseOfURLs");
+			DatabaseConnection.deleteData("DatabaseOfURLs");
 			File dir = new File(path2);
 			// Delete Old Files
 			HtmlFiles.deleteDirectory(dir);
@@ -252,7 +252,7 @@ public class Mainclass extends Thread {
 					File theDir = new File(path);
 					theDir.mkdir();
 				}
-//Double check the directory HTML_Files exists.
+				// Double check the directory HTML_Files exists.
 				if (Files.exists(Paths.get(path2))) {
 					// Write HTML Files
 					HtmlFiles.createFile(finalist.get(i), path, i + 1);
@@ -266,7 +266,7 @@ public class Mainclass extends Thread {
 				}
 
 				try {
-					Thread.sleep(1);
+					Thread.sleep(800);
 				} catch (InterruptedException e) {
 					System.err.println("Thread was interrupted! ");
 				}
