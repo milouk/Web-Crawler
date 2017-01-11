@@ -13,7 +13,7 @@ import java.util.Scanner;
  * It contains the most important methods such as run , crawl and main methods.
  * <p>
  * <b>Note: </b>If crawl run method crashes the whole program does also.
- *
+ * 
  * @author Complet
  * @version 6.0
  * @since 2017-01-02
@@ -33,9 +33,9 @@ public class Mainclass extends Thread {
 	private static String t1name; // thread 1 name
 	private static String t2name; // thread 2 name
 	private static String t3name; // thread 3 name
-	private static String link1 = "Enter Link 1";
-	private static String link2 = "Enter Link 2";
-	private static String link3 = "Enter Link 3";
+	private static String link1 = "https://gmail.com/";
+	private static String link2 = "https://review.cyanogenmod.org/";
+	private static String link3 = "http://www.bbc.com/news/";
 
 	// thread result lists
 	private static ArrayList<String> thread1_list = new ArrayList<String>();
@@ -58,7 +58,7 @@ public class Mainclass extends Thread {
 	 * not, how many layers he/she wants and the directory path to create all
 	 * Html Files.
 	 * <p>
-	 *
+	 * 
 	 * @param args
 	 *            A String Array which is used to enter arguments before
 	 *            running.
@@ -72,6 +72,7 @@ public class Mainclass extends Thread {
 		yorn = new Scanner(System.in);
 		mail = new Scanner(System.in);
 
+		System.out.println("\nPhoneutria v6.0, Team Complet\n");
 		// Ask user to send an email when process finishes
 		System.out.print("Would you like the results to be sent in an email? [Y/N] : ");
 		answer = yorn.next().charAt(0);
@@ -119,7 +120,8 @@ public class Mainclass extends Thread {
 			if (answer == 'Y' || answer == 'y') {
 
 				setDate(date = new Date());
-				GetCredentials.emailCredentials("Enter Path to EmailCredentials.txt");
+				GetCredentials.emailCredentials(
+						"C:\\Users\\pcc\\workspace\\Version6\\src\\com\\complet\\EmailCredentials.txt");
 				EmailSending.email(email);
 			}
 
@@ -139,7 +141,7 @@ public class Mainclass extends Thread {
 	 * forever.In order the database to be updated every 24 hours , the thread
 	 * sleeps for 24 hours and then it runs again.
 	 * <p>
-	 *
+	 * 
 	 * @exception InterruptedException
 	 *                occurs when the thread while sleeping is interrupted by
 	 *                another process or thread.
@@ -162,7 +164,7 @@ public class Mainclass extends Thread {
 
 			try {
 				// 86400 * 1000 = 24H
-				Thread.sleep(86400 * 1000);
+				Thread.sleep(5000);
 
 			} catch (InterruptedException e) {
 				System.err.println("Thread Unexpectedly Interrupted! ");
@@ -179,7 +181,7 @@ public class Mainclass extends Thread {
 	 * for next run, urls with "noindex" get removed, the email is sent to the
 	 * user, the html files are created and the database is updated.
 	 * <p>
-	 *
+	 * 
 	 * @exception InterruptedException
 	 *                occurs when the thread while sleeping is interrupted by
 	 *                another process or thread.
@@ -217,7 +219,8 @@ public class Mainclass extends Thread {
 		RobotTags.mIndex.removeAll(RobotTags.mIndex);
 
 		if (answer == 'Y' || answer == 'y') {
-			GetCredentials.emailCredentials("Enter Path to EmailCredentials.txt");
+			GetCredentials
+					.emailCredentials("C:\\Users\\pcc\\workspace\\Version6\\src\\com\\complet\\EmailCredentials.txt");
 			EmailSending.email(email);
 		}
 
@@ -233,6 +236,12 @@ public class Mainclass extends Thread {
 			// Re-Create Html files Directory
 			dir.mkdir();
 		}
+		// ensure dir has been created
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e1) {
+			System.err.println(e1);
+		}
 
 		for (int i = 0; i < finalist.size(); i++) {
 
@@ -241,7 +250,7 @@ public class Mainclass extends Thread {
 				// If First Link
 				if (i == 0) {
 					// Directory Tree
-					path = path2.concat("\\1-100");
+					path = path2.concat("\\1 - 100");
 					File theDir = new File(path);
 					// Create Directory
 					theDir.mkdir();
@@ -266,7 +275,7 @@ public class Mainclass extends Thread {
 				}
 
 				try {
-					Thread.sleep(800);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					System.err.println("Thread was interrupted! ");
 				}
