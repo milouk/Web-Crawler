@@ -21,10 +21,10 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 * Infinite layers.
 * Robot Meta Tags.
 * E-mail Notifications containing : 
- * Scanned Urls.
- * Elapsed Time.
- * Number of Total Links.
- * Number of Scanned Layers.
+  * Scanned Urls.
+  * Elapsed Time.
+  * Number of Total Links.
+  * Number of Scanned Layers.
 * SQL Database.
 * Directory Tree structure for HTML Files.
 * Update Database every 24 Hours with "fresh" Links.
