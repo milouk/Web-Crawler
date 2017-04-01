@@ -49,12 +49,14 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 
 
 <h4>Thread support : </h4>
+
 * Simultaneous 3 URL scan.
 * Sleep for 1,5 seconds to avoid getting thrown out of the Host-Server.
 
+
 <h2><b>How to Configure "Phoneutria"</b></h2>
 <p>
-Phoneutria is fully written in [Java (v. 8+)](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html) and its project is fully managed by [Maven (v. 3.3.9)](https://maven.apache.org/download.cgi).
+Phoneutria is fully written in [Java (v. 8+)](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html) and managed by [Maven (v. 3.3.9)](https://maven.apache.org/download.cgi).
 
 <h4>Dependencies : </h4>
 
