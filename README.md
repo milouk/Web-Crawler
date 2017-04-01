@@ -31,6 +31,7 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 * Checks Links' validity via checking HTTP Server Response Message.
 
 <h4>Extensions Excluded : </h4>
+
 * .jpeg
 * .jpg
 * .pdf
@@ -43,6 +44,7 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 * .zip
 * .gz
 * Download links ( "://dl." )
+
 
 <h4>Thread support : </h4>
 * Simultaneous 3 URL scan.
