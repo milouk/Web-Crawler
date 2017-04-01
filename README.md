@@ -17,6 +17,7 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 <h2><b>Features</b></h2>
 
 <h4>Supported features : </h4>
+
 * Infinite layers.
 * Robot Meta Tags.
 * E-mail Notifications containing : 
@@ -29,6 +30,7 @@ Crawlers can validate hyperlinks and HTML code. They can also be used for web sc
 * Update Database every 24 Hours with "fresh" Links.
 * Safe keeping E-mail, Database Credentials in an external Txt File. 
 * Checks Links' validity via checking HTTP Server Response Message.
+
 
 <h4>Extensions Excluded : </h4>
 
@@ -91,7 +93,7 @@ For more information about how Phoneutria works, refer to our JavaDoc section lo
 <p>
 <code> https://github.com/milouk/Web_Crawler/tree/master/doc </code>
 
-<h2><b>License</b><h2>
+<h2><b>License</b></h2>
 
 Copyright 2017 Athens University of Economics and Business
 
